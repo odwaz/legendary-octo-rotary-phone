@@ -1,0 +1,5 @@
+com\merchant\wallet\transaction\service\FeeCalculatorTest.class
+com\merchant\wallet\transaction\service\TransactionStatusManagerTest.class
+com\merchant\wallet\transaction\controller\TransactionControllerTest.class
+com\merchant\wallet\transaction\TransactionServiceApplicationTest.class
+com\merchant\wallet\transaction\service\TransactionValidatorTest.class

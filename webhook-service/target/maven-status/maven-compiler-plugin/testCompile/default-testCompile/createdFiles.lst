@@ -1,0 +1,4 @@
+com\merchant\wallet\webhook\integration\WebhookIntegrationTest.class
+com\merchant\wallet\webhook\WebhookServiceApplicationTest.class
+com\merchant\wallet\webhook\controller\WebhookControllerTest.class
+com\merchant\wallet\webhook\service\WebhookServiceTest.class

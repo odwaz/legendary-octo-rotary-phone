@@ -1,0 +1,5 @@
+com\merchant\wallet\webhook\util\RequestValidator.class
+com\merchant\wallet\webhook\controller\WebhookController.class
+com\merchant\wallet\webhook\WebhookServiceApplication.class
+com\merchant\wallet\webhook\config\WebClientConfig.class
+com\merchant\wallet\webhook\service\WebhookService.class

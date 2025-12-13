@@ -1,0 +1,14 @@
+com\merchant\wallet\auth\oauth2\OtpGrantAuthenticationToken.class
+com\merchant\wallet\auth\repository\WalletUserRepository.class
+com\merchant\wallet\auth\service\OtpToken.class
+com\merchant\wallet\auth\AuthServiceApplication.class
+com\merchant\wallet\auth\domain\WalletUser.class
+com\merchant\wallet\auth\service\UserRegistrationValidator.class
+com\merchant\wallet\auth\config\OpenApiConfig.class
+com\merchant\wallet\auth\service\OtpGenerator.class
+com\merchant\wallet\auth\controller\AuthController.class
+com\merchant\wallet\auth\service\UserRegistrationRequest.class
+com\merchant\wallet\auth\dto\LoginRequest.class
+com\merchant\wallet\auth\service\AuthService.class
+com\merchant\wallet\auth\config\JwtUtil.class
+com\merchant\wallet\auth\config\SecurityConfig.class

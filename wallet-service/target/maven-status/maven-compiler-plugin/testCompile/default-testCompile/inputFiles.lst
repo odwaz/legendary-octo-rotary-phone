@@ -1,0 +1,7 @@
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\controller\WalletControllerTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\integration\WalletIntegrationTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\repository\WalletRepositoryTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\service\BalanceCalculatorTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\service\BalanceValidatorTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\service\WalletCreatorTest.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\test\java\com\merchant\wallet\wallet\WalletServiceApplicationTest.java

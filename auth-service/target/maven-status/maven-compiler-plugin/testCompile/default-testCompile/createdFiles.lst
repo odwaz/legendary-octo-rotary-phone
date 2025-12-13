@@ -1,0 +1,6 @@
+com\merchant\wallet\auth\controller\AuthControllerTest$TestConfig.class
+com\merchant\wallet\auth\service\AuthServiceTest.class
+com\merchant\wallet\auth\service\OtpGeneratorTest.class
+com\merchant\wallet\auth\AuthServiceApplicationTest.class
+com\merchant\wallet\auth\controller\AuthControllerTest.class
+com\merchant\wallet\auth\service\UserRegistrationValidatorTest.class
