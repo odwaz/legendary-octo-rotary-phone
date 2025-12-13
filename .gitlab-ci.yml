@@ -1,0 +1,74 @@
+stages:
+  - build
+  - test
+  - docker
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - "*/target/*.jar"
+    expire_in: 1 hour
+
+test:
+  stage: test
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn test
+  artifacts:
+    reports:
+      junit:
+        - "*/target/surefire-reports/TEST-*.xml"
+
+.docker_build:
+  stage: docker
+  image: docker:24
+  services:
+    - docker:24-dind
+  before_script:
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_TOKEN
+  script:
+    - cd $SERVICE_DIR
+    - docker build -t $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA -t $DOCKER_HUB_USER/$SERVICE_NAME:latest .
+    - docker push $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_HUB_USER/$SERVICE_NAME:latest
+
+docker:api-gateway:
+  extends: .docker_build
+  variables:
+    SERVICE_DIR: api-gateway
+    SERVICE_NAME: api-gateway
+
+docker:auth-service:
+  extends: .docker_build
+  variables:
+    SERVICE_DIR: auth-service
+    SERVICE_NAME: auth-service
+
+docker:wallet-service:
+  extends: .docker_build
+  variables:
+    SERVICE_DIR: wallet-service
+    SERVICE_NAME: wallet-service
+
+docker:transaction-service:
+  extends: .docker_build
+  variables:
+    SERVICE_DIR: transaction-service
+    SERVICE_NAME: transaction-service
+
+docker:webhook-service:
+  extends: .docker_build
+  variables:
+    SERVICE_DIR: webhook-service
+    SERVICE_NAME: webhook-service
