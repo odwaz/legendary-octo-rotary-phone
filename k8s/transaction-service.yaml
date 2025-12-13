@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: transaction-service
-        image: wallet/transaction-service:latest
-        imagePullPolicy: Never
+        image: codecorner/transaction-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8003
         env:

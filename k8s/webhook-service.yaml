@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: webhook-service
-        image: wallet/webhook-service:latest
-        imagePullPolicy: Never
+        image: codecorner/webhook-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8005
         env:

@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: wallet/auth-service:latest
-        imagePullPolicy: Never
+        image: codecorner/auth-service:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8001
         env:

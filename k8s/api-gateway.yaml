@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: wallet/api-gateway:latest
-        imagePullPolicy: Never
+        image: codecorner/api-gateway:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
 ---
