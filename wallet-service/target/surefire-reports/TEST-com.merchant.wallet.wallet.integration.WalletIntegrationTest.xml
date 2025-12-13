@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.merchant.wallet.wallet.integration.WalletIntegrationTest" time="7.036" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="D:\Documents\projects\wallet-microservices\wallet-service\target\test-classes;D:\Documents\projects\wallet-microservices\wallet-service\target\classes;D:\Documents\projects\wallet-microservices\shared-dtos\target\shared-dtos-1.0.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-ui\2.3.0\springdoc-openapi-starter-webflux-ui-2.3.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-api\2.3.0\springdoc-openapi-starter-webflux-api-2.3.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.3.0\springdoc-openapi-starter-common-2.3.0.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.19\swagger-core-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\org\apache\commons\commons-lang3\3.17.0\commons-lang3-3.17.0.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.19\swagger-annotations-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.19\swagger-models-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.2\jackson-dataformat-yaml-2.18.2.jar;C:\Users\odwad\.m2\repository\org\webjars\swagger-ui\5.10.3\swagger-ui-5.10.3.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-webflux\3.4.2\spring-boot-starter-webflux-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.2\spring-boot-starter-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.2\spring-boot-autoconfigure-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.2\spring-boot-starter-logging-3.4.2.jar;C:\Users\odwad\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\odwad\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\odwad\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\odwad\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\odwad\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\odwad\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\odwad\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.2\spring-boot-starter-json-3.4.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-reactor-netty\3.4.2\spring-boot-starter-reactor-netty-3.4.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty-http\1.2.2\reactor-netty-http-1.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-http\4.1.117.Final\netty-codec-http-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-common\4.1.117.Final\netty-common-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-buffer\4.1.117.Final\netty-buffer-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport\4.1.117.Final\netty-transport-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec\4.1.117.Final\netty-codec-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-http2\4.1.117.Final\netty-codec-http2-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns\4.1.117.Final\netty-resolver-dns-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver\4.1.117.Final\netty-resolver-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-dns\4.1.117.Final\netty-codec-dns-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns-native-macos\4.1.117.Final\netty-resolver-dns-native-macos-4.1.117.Final-osx-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns-classes-macos\4.1.117.Final\netty-resolver-dns-classes-macos-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-native-epoll\4.1.117.Final\netty-transport-native-epoll-4.1.117.Final-linux-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.117.Final\netty-transport-native-unix-common-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.117.Final\netty-transport-classes-epoll-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-web\6.2.2\spring-web-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-beans\6.2.2\spring-beans-6.2.2.jar;C:\Users\odwad\.m2\repository\io\micrometer\micrometer-observation\1.14.3\micrometer-observation-1.14.3.jar;C:\Users\odwad\.m2\repository\io\micrometer\micrometer-commons\1.14.3\micrometer-commons-1.14.3.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-webflux\6.2.2\spring-webflux-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-data-r2dbc\3.4.2\spring-boot-starter-data-r2dbc-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-r2dbc\3.4.2\spring-data-r2dbc-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-relational\3.4.2\spring-data-relational-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-commons\3.4.2\spring-data-commons-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-tx\6.2.2\spring-tx-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-context\6.2.2\spring-context-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-aop\6.2.2\spring-aop-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-expression\6.2.2\spring-expression-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-jdbc\6.2.2\spring-jdbc-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-r2dbc\6.2.2\spring-r2dbc-6.2.2.jar;C:\Users\odwad\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-spi\1.0.0.RELEASE\r2dbc-spi-1.0.0.RELEASE.jar;C:\Users\odwad\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-pool\1.0.2.RELEASE\r2dbc-pool-1.0.2.RELEASE.jar;C:\Users\odwad\.m2\repository\io\projectreactor\addons\reactor-pool\1.1.1\reactor-pool-1.1.1.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-postgresql\0.8.13.RELEASE\r2dbc-postgresql-0.8.13.RELEASE.jar;C:\Users\odwad\.m2\repository\com\ongres\scram\client\2.1\client-2.1.jar;C:\Users\odwad\.m2\repository\com\ongres\scram\common\2.1\common-2.1.jar;C:\Users\odwad\.m2\repository\com\ongres\stringprep\saslprep\1.1\saslprep-1.1.jar;C:\Users\odwad\.m2\repository\com\ongres\stringprep\stringprep\1.1\stringprep-1.1.jar;C:\Users\odwad\.m2\repository\io\projectreactor\reactor-core\3.7.2\reactor-core-3.7.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty\1.2.2\reactor-netty-1.2.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty-core\1.2.2\reactor-netty-core-1.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\netty-handler\4.1.117.Final\netty-handler-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-handler-proxy\4.1.117.Final\netty-handler-proxy-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-socks\4.1.117.Final\netty-codec-socks-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\incubator\reactor-netty-incubator-quic\0.2.2\reactor-netty-incubator-quic-0.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\incubator\netty-incubator-codec-native-quic\0.0.70.Final\netty-incubator-codec-native-quic-0.0.70.Final-linux-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\incubator\netty-incubator-codec-classes-quic\0.0.70.Final\netty-incubator-codec-classes-quic-0.0.70.Final.jar;C:\Users\odwad\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\odwad\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-h2\1.0.0.RELEASE\r2dbc-h2-1.0.0.RELEASE.jar;C:\Users\odwad\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.2\spring-boot-starter-test-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-test\3.4.2\spring-boot-test-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.2\spring-boot-test-autoconfigure-3.4.2.jar;C:\Users\odwad\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\odwad\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\odwad\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\odwad\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\odwad\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\odwad\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\odwad\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\odwad\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\odwad\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\odwad\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\odwad\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\odwad\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\odwad\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\odwad\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\odwad\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\odwad\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\odwad\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\odwad\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\odwad\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-core\6.2.2\spring-core-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-jcl\6.2.2\spring-jcl-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-test\6.2.2\spring-test-6.2.2.jar;C:\Users\odwad\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\odwad\.m2\repository\io\projectreactor\reactor-test\3.7.2\reactor-test-3.7.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Africa/Johannesburg"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="APPLICATION_NAME" value="wallet-service"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ZA"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
+    <property name="sun.java.command" value="C:\Users\odwad\AppData\Local\Temp\surefire3223120197770225682\surefirebooter-20251109211609006_18.jar C:\Users\odwad\AppData\Local\Temp\surefire3223120197770225682 2025-11-09T21-15-08_514-jvmRun1 surefire-20251109211609006_16tmp surefire_2-20251109211609006_17tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\Documents\projects\wallet-microservices\wallet-service\target\test-classes;D:\Documents\projects\wallet-microservices\wallet-service\target\classes;D:\Documents\projects\wallet-microservices\shared-dtos\target\shared-dtos-1.0.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-ui\2.3.0\springdoc-openapi-starter-webflux-ui-2.3.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-webflux-api\2.3.0\springdoc-openapi-starter-webflux-api-2.3.0.jar;C:\Users\odwad\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.3.0\springdoc-openapi-starter-common-2.3.0.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.19\swagger-core-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\org\apache\commons\commons-lang3\3.17.0\commons-lang3-3.17.0.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.19\swagger-annotations-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.19\swagger-models-jakarta-2.2.19.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.2\jackson-dataformat-yaml-2.18.2.jar;C:\Users\odwad\.m2\repository\org\webjars\swagger-ui\5.10.3\swagger-ui-5.10.3.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-webflux\3.4.2\spring-boot-starter-webflux-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.2\spring-boot-starter-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.2\spring-boot-autoconfigure-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.2\spring-boot-starter-logging-3.4.2.jar;C:\Users\odwad\.m2\repository\ch\qos\logback\logback-classic\1.5.16\logback-classic-1.5.16.jar;C:\Users\odwad\.m2\repository\ch\qos\logback\logback-core\1.5.16\logback-core-1.5.16.jar;C:\Users\odwad\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\odwad\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\odwad\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\odwad\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\odwad\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.2\spring-boot-starter-json-3.4.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Users\odwad\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.18.2\jackson-module-parameter-names-2.18.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-reactor-netty\3.4.2\spring-boot-starter-reactor-netty-3.4.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty-http\1.2.2\reactor-netty-http-1.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-http\4.1.117.Final\netty-codec-http-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-common\4.1.117.Final\netty-common-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-buffer\4.1.117.Final\netty-buffer-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport\4.1.117.Final\netty-transport-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec\4.1.117.Final\netty-codec-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-http2\4.1.117.Final\netty-codec-http2-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns\4.1.117.Final\netty-resolver-dns-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver\4.1.117.Final\netty-resolver-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-dns\4.1.117.Final\netty-codec-dns-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns-native-macos\4.1.117.Final\netty-resolver-dns-native-macos-4.1.117.Final-osx-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\netty-resolver-dns-classes-macos\4.1.117.Final\netty-resolver-dns-classes-macos-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-native-epoll\4.1.117.Final\netty-transport-native-epoll-4.1.117.Final-linux-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.117.Final\netty-transport-native-unix-common-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.117.Final\netty-transport-classes-epoll-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-web\6.2.2\spring-web-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-beans\6.2.2\spring-beans-6.2.2.jar;C:\Users\odwad\.m2\repository\io\micrometer\micrometer-observation\1.14.3\micrometer-observation-1.14.3.jar;C:\Users\odwad\.m2\repository\io\micrometer\micrometer-commons\1.14.3\micrometer-commons-1.14.3.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-webflux\6.2.2\spring-webflux-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-data-r2dbc\3.4.2\spring-boot-starter-data-r2dbc-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-r2dbc\3.4.2\spring-data-r2dbc-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-relational\3.4.2\spring-data-relational-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\data\spring-data-commons\3.4.2\spring-data-commons-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-tx\6.2.2\spring-tx-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-context\6.2.2\spring-context-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-aop\6.2.2\spring-aop-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-expression\6.2.2\spring-expression-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-jdbc\6.2.2\spring-jdbc-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-r2dbc\6.2.2\spring-r2dbc-6.2.2.jar;C:\Users\odwad\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-spi\1.0.0.RELEASE\r2dbc-spi-1.0.0.RELEASE.jar;C:\Users\odwad\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-pool\1.0.2.RELEASE\r2dbc-pool-1.0.2.RELEASE.jar;C:\Users\odwad\.m2\repository\io\projectreactor\addons\reactor-pool\1.1.1\reactor-pool-1.1.1.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-postgresql\0.8.13.RELEASE\r2dbc-postgresql-0.8.13.RELEASE.jar;C:\Users\odwad\.m2\repository\com\ongres\scram\client\2.1\client-2.1.jar;C:\Users\odwad\.m2\repository\com\ongres\scram\common\2.1\common-2.1.jar;C:\Users\odwad\.m2\repository\com\ongres\stringprep\saslprep\1.1\saslprep-1.1.jar;C:\Users\odwad\.m2\repository\com\ongres\stringprep\stringprep\1.1\stringprep-1.1.jar;C:\Users\odwad\.m2\repository\io\projectreactor\reactor-core\3.7.2\reactor-core-3.7.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty\1.2.2\reactor-netty-1.2.2.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\reactor-netty-core\1.2.2\reactor-netty-core-1.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\netty-handler\4.1.117.Final\netty-handler-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-handler-proxy\4.1.117.Final\netty-handler-proxy-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\netty\netty-codec-socks\4.1.117.Final\netty-codec-socks-4.1.117.Final.jar;C:\Users\odwad\.m2\repository\io\projectreactor\netty\incubator\reactor-netty-incubator-quic\0.2.2\reactor-netty-incubator-quic-0.2.2.jar;C:\Users\odwad\.m2\repository\io\netty\incubator\netty-incubator-codec-native-quic\0.0.70.Final\netty-incubator-codec-native-quic-0.0.70.Final-linux-x86_64.jar;C:\Users\odwad\.m2\repository\io\netty\incubator\netty-incubator-codec-classes-quic\0.0.70.Final\netty-incubator-codec-classes-quic-0.0.70.Final.jar;C:\Users\odwad\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\odwad\.m2\repository\org\projectlombok\lombok\1.18.36\lombok-1.18.36.jar;C:\Users\odwad\.m2\repository\io\r2dbc\r2dbc-h2\1.0.0.RELEASE\r2dbc-h2-1.0.0.RELEASE.jar;C:\Users\odwad\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.4.2\spring-boot-starter-test-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-test\3.4.2\spring-boot-test-3.4.2.jar;C:\Users\odwad\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.4.2\spring-boot-test-autoconfigure-3.4.2.jar;C:\Users\odwad\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\odwad\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\odwad\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\odwad\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\odwad\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\odwad\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\odwad\.m2\repository\org\assertj\assertj-core\3.26.3\assertj-core-3.26.3.jar;C:\Users\odwad\.m2\repository\net\bytebuddy\byte-buddy\1.15.11\byte-buddy-1.15.11.jar;C:\Users\odwad\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\odwad\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.4\junit-jupiter-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.4\junit-jupiter-api-5.11.4.jar;C:\Users\odwad\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\odwad\.m2\repository\org\junit\platform\junit-platform-commons\1.11.4\junit-platform-commons-1.11.4.jar;C:\Users\odwad\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.4\junit-jupiter-params-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.4\junit-jupiter-engine-5.11.4.jar;C:\Users\odwad\.m2\repository\org\junit\platform\junit-platform-engine\1.11.4\junit-platform-engine-1.11.4.jar;C:\Users\odwad\.m2\repository\org\mockito\mockito-core\5.14.2\mockito-core-5.14.2.jar;C:\Users\odwad\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar;C:\Users\odwad\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\odwad\.m2\repository\org\mockito\mockito-junit-jupiter\5.14.2\mockito-junit-jupiter-5.14.2.jar;C:\Users\odwad\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\odwad\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-core\6.2.2\spring-core-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-jcl\6.2.2\spring-jcl-6.2.2.jar;C:\Users\odwad\.m2\repository\org\springframework\spring-test\6.2.2\spring-test-6.2.2.jar;C:\Users\odwad\.m2\repository\org\xmlunit\xmlunit-core\2.10.0\xmlunit-core-2.10.0.jar;C:\Users\odwad\.m2\repository\io\projectreactor\reactor-test\3.7.2\reactor-test-3.7.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\odwad"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\Documents\projects\wallet-microservices\wallet-service"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="windows-1252"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\odwad\AppData\Local\Temp\surefire3223120197770225682\surefirebooter-20251109211609006_18.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.12+8-LTS-286"/>
+    <property name="user.name" value="odwad"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\odwad\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\odwad\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.12"/>
+    <property name="user.dir" value="D:\Documents\projects\wallet-microservices\wallet-service"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="24708"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Java\jdk-17\;C:\Program Files\Maven\apache-maven-3.9.11\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\terraform;C:\Users\odwad\AppData\Local\Android\Sdk\emulator;C:\Users\odwad\AppData\Local\Android\Sdk\tools;C:\Users\odwad\AppData\Local\Android\Sdk\tools\bin;C:\Users\odwad\AppData\Local\Android\Sdk\platform-tools;C:\ProgramData\chocolatey\bin;C:\Program Files\Rancher Desktop\resources\resources\win32\bin\;C:\Program Files\Rancher Desktop\resources\resources\win32\docker-cli-plugins\;C:\Program Files\Rancher Desktop\resources\resources\linux\bin\;C:\Program Files\Rancher Desktop\resources\resources\linux\docker-cli-plugins\;C:\Users\odwad\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\PuTTY\;C:\Program Files\Python\bin;C:\Users\odwad\python\Scripts\;C:\Users\odwad\python\;C:\Users\odwad\AppData\Local\Programs\Python\Launcher\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Java\jdk-17\;C:\Program Files\Maven\apache-maven-3.9.11\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\terraform;C:\Users\odwad\AppData\Local\Android\Sdk\emulator;C:\Users\odwad\AppData\Local\Android\Sdk\tools;C:\Users\odwad\AppData\Local\Android\Sdk\tools\bin;C:\Users\odwad\AppData\Local\Android\Sdk\platform-tools;C:\ProgramData\chocolatey\bin;C:\Program Files\Rancher Desktop\resources\resources\win32\bin\;C:\Program Files\Rancher Desktop\resources\resources\win32\docker-cli-plugins\;C:\Program Files\Rancher Desktop\resources\resources\linux\bin\;C:\Program Files\Rancher Desktop\resources\resources\linux\docker-cli-plugins\;C:\Users\odwad\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\PuTTY\;C:\Users\odwad\AppData\Local\Android\Sdk\platform-tools;C:\Users\od;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.12+8-LTS-286"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[wallet-service] "/>
+  </properties>
+  <testcase name="shouldProcessTransferEndToEnd" classname="com.merchant.wallet.wallet.integration.WalletIntegrationTest" time="0.591">
+    <system-out><![CDATA[2025-11-09 21:16:20 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.merchant.wallet.wallet.integration.WalletIntegrationTest]: WalletIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-11-09 21:16:20 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.merchant.wallet.wallet.WalletServiceApplication for test class com.merchant.wallet.wallet.integration.WalletIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.2)
+
+2025-11-09 21:16:20 [main] INFO  c.m.w.w.i.WalletIntegrationTest - Starting WalletIntegrationTest using Java 17.0.12 with PID 24708 (started by odwad in D:\Documents\projects\wallet-microservices\wallet-service)
+2025-11-09 21:16:20 [main] INFO  c.m.w.w.i.WalletIntegrationTest - No active profile set, falling back to 1 default profile: "default"
+2025-11-09 21:16:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode.
+2025-11-09 21:16:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 1 R2DBC repository interface.
+2025-11-09 21:16:24 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-11-09 21:16:24 [main] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - 15 mappings in 'requestMappingHandlerMapping'
+2025-11-09 21:16:24 [main] DEBUG o.s.w.r.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-11-09 21:16:24 [main] DEBUG o.s.w.r.r.m.a.ControllerMethodResolver - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 @ExceptionHandler
+2025-11-09 21:16:24 [main] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-11-09 21:16:25 [single-1] DEBUG o.s.r.connection.init.ScriptUtils - Executing SQL script from class path resource [schema.sql]
+2025-11-09 21:16:25 [Thread-15] DEBUG o.s.r.connection.init.ScriptUtils - 0 returned as update count for SQL: CREATE TABLE IF NOT EXISTS wallets ( wallet_id SERIAL PRIMARY KEY, user_id BIGINT NOT NULL, merchant_id BIGINT, balance DECIMAL(15,2) DEFAULT 0.00, currency VARCHAR(3) DEFAULT 'ZAR', wallet_alias VARCHAR(255) UNIQUE, active BOOLEAN DEFAULT true, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP )
+2025-11-09 21:16:25 [Thread-15] DEBUG o.s.r.connection.init.ScriptUtils - Executed SQL script from class path resource [schema.sql] in 152 ms.
+2025-11-09 21:16:25 [main] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-11-09 21:16:26 [main] INFO  o.s.b.w.e.netty.NettyWebServer - Netty started on port 57685 (http)
+2025-11-09 21:16:26 [main] INFO  c.m.w.w.i.WalletIntegrationTest - Started WalletIntegrationTest in 5.747 seconds (process running for 17.337)
+2025-11-09 21:16:26 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [6f12fca0] HTTP POST /api/v1/wallets
+2025-11-09 21:16:26 [parallel-7] DEBUG org.springframework.web.HttpLogging - [6f12fca0] Encoding [{currency=ZAR, walletAlias=sender_wallet_transfer, userId=3}]
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [6866b50] HTTP POST "/api/v1/wallets"
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [6866b50] Mapped to com.merchant.wallet.wallet.controller.WalletController#createWallet(Map)
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [6866b50] Content-Type:application/json
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [6866b50] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:26 [parallel-7] DEBUG org.springframework.web.HttpLogging - [6866b50] Decoded [{currency=ZAR, walletAlias=sender_wallet_transfer, userId=3}]
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [INSERT INTO wallets (user_id, BALANCE, CURRENCY, wallet_alias, ACTIVE) VALUES ($1, $2, $3, $4, $5)]
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [6866b50] Using 'application/json' given [*/*] and supported [application/json, application/*+json, application/x-ndjson, text/event-stream]
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [6866b50] 0..1 [com.merchant.wallet.wallet.domain.Wallet]
+2025-11-09 21:16:26 [parallel-7] DEBUG org.springframework.web.HttpLogging - [6866b50] Encoding [com.merchant.wallet.wallet.domain.Wallet@592b9f13]
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [6866b50] Completed 200 OK
+2025-11-09 21:16:26 [parallel-7] DEBUG o.s.w.r.f.client.ExchangeFunctions - [6f12fca0] [2e7f7e6e] Response 200 OK
+2025-11-09 21:16:26 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [7d0e43d6] HTTP POST /api/v1/wallets
+2025-11-09 21:16:26 [parallel-8] DEBUG org.springframework.web.HttpLogging - [7d0e43d6] Encoding [{currency=ZAR, walletAlias=receiver_wallet_transfer, userId=4}]
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [3d1c23b6] HTTP POST "/api/v1/wallets"
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [3d1c23b6] Mapped to com.merchant.wallet.wallet.controller.WalletController#createWallet(Map)
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [3d1c23b6] Content-Type:application/json
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [3d1c23b6] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:26 [parallel-8] DEBUG org.springframework.web.HttpLogging - [3d1c23b6] Decoded [{currency=ZAR, walletAlias=receiver_wallet_transfer, userId=4}]
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [INSERT INTO wallets (user_id, BALANCE, CURRENCY, wallet_alias, ACTIVE) VALUES ($1, $2, $3, $4, $5)]
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [3d1c23b6] Using 'application/json' given [*/*] and supported [application/json, application/*+json, application/x-ndjson, text/event-stream]
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [3d1c23b6] 0..1 [com.merchant.wallet.wallet.domain.Wallet]
+2025-11-09 21:16:26 [parallel-8] DEBUG org.springframework.web.HttpLogging - [3d1c23b6] Encoding [com.merchant.wallet.wallet.domain.Wallet@4d6d5e7a]
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [3d1c23b6] Completed 200 OK
+2025-11-09 21:16:26 [parallel-8] DEBUG o.s.w.r.f.client.ExchangeFunctions - [7d0e43d6] [16875161] Response 200 OK
+2025-11-09 21:16:26 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [757f47f0] HTTP POST /api/v1/wallets/transfer
+2025-11-09 21:16:26 [parallel-9] DEBUG org.springframework.web.HttpLogging - [757f47f0] Encoding [{fromWalletAlias=sender_wallet_transfer, toWalletAlias=receiver_wallet_transfer, amount=50.00, descr (truncated)...]
+2025-11-09 21:16:26 [parallel-9] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [7ea1ac1] HTTP POST "/api/v1/wallets/transfer"
+2025-11-09 21:16:26 [parallel-9] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [7ea1ac1] Mapped to com.merchant.wallet.wallet.controller.WalletController#transfer(Map)
+2025-11-09 21:16:26 [parallel-9] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [7ea1ac1] Content-Type:application/json
+2025-11-09 21:16:26 [parallel-9] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [7ea1ac1] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:26 [parallel-9] DEBUG org.springframework.web.HttpLogging - [7ea1ac1] Decoded [{fromWalletAlias=sender_wallet_transfer, toWalletAlias=receiver_wallet_transfer, amount=50.00, descr (truncated)...]
+2025-11-09 21:16:26 [parallel-9] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.wallet_id, wallets.user_id, wallets.merchant_id, wallets.BALANCE, wallets.CURRENCY, wallets.wallet_alias, wallets.ACTIVE FROM wallets WHERE wallets.wallet_alias = $1]
+2025-11-09 21:16:27 [parallel-9] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.wallet_id, wallets.user_id, wallets.merchant_id, wallets.BALANCE, wallets.CURRENCY, wallets.wallet_alias, wallets.ACTIVE FROM wallets WHERE wallets.wallet_alias = $1]
+2025-11-09 21:16:27 [parallel-9] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.* FROM wallets WHERE wallets.wallet_id = $1 LIMIT 2]
+2025-11-09 21:16:27 [parallel-9] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.* FROM wallets WHERE wallets.wallet_id = $1 LIMIT 2]
+2025-11-09 21:16:27 [parallel-9] DEBUG org.springframework.web.HttpLogging - [7ea1ac1] Resolved [RuntimeException: Insufficient balance] for HTTP POST /api/v1/wallets/transfer
+2025-11-09 21:16:27 [parallel-9] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [7ea1ac1]  500 Server Error for HTTP POST "/api/v1/wallets/transfer"
+java.lang.RuntimeException: Insufficient balance
+	at com.merchant.wallet.wallet.service.WalletService.lambda$processPayment$3(WalletService.java:82)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? Handler com.merchant.wallet.wallet.controller.WalletController#transfer(Map) [DispatcherHandler]
+	*__checkpoint ? HTTP POST "/api/v1/wallets/transfer" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at com.merchant.wallet.wallet.service.WalletService.lambda$processPayment$3(WalletService.java:82)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:132)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.signal(MonoZip.java:297)
+		at reactor.core.publisher.MonoZip$ZipInner.onNext(MonoZip.java:478)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.MonoUsingWhen$MonoUsingWhenSubscriber.deferredComplete(MonoUsingWhen.java:268)
+		at reactor.core.publisher.FluxUsingWhen$CommitInner.onComplete(FluxUsingWhen.java:532)
+		at reactor.core.publisher.Operators.complete(Operators.java:137)
+		at reactor.core.publisher.MonoEmpty.subscribe(MonoEmpty.java:46)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxUsingWhen$UsingWhenSubscriber.onComplete(FluxUsingWhen.java:389)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:159)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.Operators$MonoInnerProducerBase.complete(Operators.java:2864)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.onComplete(MonoSingle.java:180)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2231)
+		at reactor.core.publisher.FluxUsingWhen$UsingWhenSubscriber.deferredComplete(FluxUsingWhen.java:397)
+		at reactor.core.publisher.FluxUsingWhen$CommitInner.onComplete(FluxUsingWhen.java:532)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2231)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2231)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:210)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:210)
+		at reactor.pool.SimpleDequePool.maybeRecycleAndDrain(SimpleDequePool.java:546)
+		at reactor.pool.SimpleDequePool$QueuePoolRecyclerInner.onComplete(SimpleDequePool.java:787)
+		at reactor.core.publisher.Operators.complete(Operators.java:137)
+		at reactor.core.publisher.MonoEmpty.subscribe(MonoEmpty.java:46)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.pool.SimpleDequePool$QueuePoolRecyclerMono.subscribe(SimpleDequePool.java:899)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:241)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:204)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:260)
+		at reactor.core.publisher.Operators.complete(Operators.java:137)
+		at reactor.core.publisher.MonoEmpty.subscribe(MonoEmpty.java:46)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:241)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:204)
+		at reactor.core.publisher.MonoIgnoreElements$IgnoreElementsSubscriber.onComplete(MonoIgnoreElements.java:89)
+		at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:223)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:85)
+		at reactor.core.publisher.MonoCallable$MonoCallableSubscription.request(MonoCallable.java:159)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoCallable.subscribe(MonoCallable.java:48)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.core.publisher.MonoIgnoreElements$IgnoreElementsSubscriber.onError(MonoIgnoreElements.java:84)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onError(FluxMap.java:134)
+		at reactor.core.publisher.FluxFilter$FilterSubscriber.onError(FluxFilter.java:157)
+		at reactor.core.publisher.FluxFilter$FilterConditionalSubscriber.onError(FluxFilter.java:291)
+		at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onError(FluxMap.java:265)
+		at reactor.core.publisher.Operators.error(Operators.java:198)
+		at reactor.core.publisher.MonoError.subscribe(MonoError.java:53)
+		at reactor.core.publisher.MonoDeferContextual.subscribe(MonoDeferContextual.java:55)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxUsingWhen$UsingWhenSubscriber.onComplete(FluxUsingWhen.java:389)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.checkTerminated(FluxFlatMap.java:850)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.drainLoop(FluxFlatMap.java:612)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.drain(FluxFlatMap.java:592)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.onComplete(FluxFlatMap.java:469)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onComplete(FluxMapFuseable.java:152)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:357)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+		at reactor.core.publisher.FluxMap$MapSubscriber.request(FluxMap.java:164)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.onSubscribe(FluxFlatMap.java:373)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onSubscribe(FluxMap.java:92)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:202)
+		at reactor.core.publisher.FluxFlatMap.subscribeOrReturn(FluxFlatMap.java:94)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8876)
+		at reactor.core.publisher.FluxUsingWhen$ResourceSubscriber.onNext(FluxUsingWhen.java:198)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onNext(FluxMap.java:122)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxRetry$RetrySubscriber.onNext(FluxRetry.java:88)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondComplete(MonoFlatMap.java:245)
+		at reactor.core.publisher.MonoFlatMap$FlatMapInner.onNext(MonoFlatMap.java:305)
+		at io.r2dbc.pool.MonoDiscardOnCancel$MonoDiscardOnCancelSubscriber.onNext(MonoDiscardOnCancel.java:92)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.complete(MonoIgnoreThen.java:294)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onNext(MonoIgnoreThen.java:188)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:237)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:204)
+		at reactor.core.publisher.MonoIgnoreElements$IgnoreElementsSubscriber.onComplete(MonoIgnoreElements.java:89)
+		at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:223)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onComplete(FluxSwitchIfEmpty.java:85)
+		at reactor.core.publisher.MonoCallable$MonoCallableSubscription.request(MonoCallable.java:159)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoCallable.subscribe(MonoCallable.java:48)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at io.r2dbc.pool.MonoDiscardOnCancel.subscribe(MonoDiscardOnCancel.java:50)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+		at reactor.pool.AbstractPool$Borrower.deliver(AbstractPool.java:471)
+		at reactor.pool.SimpleDequePool.lambda$drainLoop$8(SimpleDequePool.java:381)
+		at reactor.core.scheduler.ImmediateScheduler.schedule(ImmediateScheduler.java:52)
+		at reactor.pool.SimpleDequePool.drainLoop(SimpleDequePool.java:381)
+		at reactor.pool.SimpleDequePool.pendingOffer(SimpleDequePool.java:624)
+		at reactor.pool.SimpleDequePool.doAcquire(SimpleDequePool.java:306)
+		at reactor.pool.AbstractPool$Borrower.request(AbstractPool.java:425)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.pool.SimpleDequePool$QueueBorrowerMono.subscribe(SimpleDequePool.java:742)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.FluxRetry$RetrySubscriber.resubscribe(FluxRetry.java:120)
+		at reactor.core.publisher.MonoRetry.subscribeOrReturn(MonoRetry.java:50)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4560)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onError(MonoFlatMap.java:180)
+		at reactor.core.publisher.FluxMap$MapSubscriber.onError(FluxMap.java:134)
+		at reactor.core.publisher.Operators.error(Operators.java:198)
+		at reactor.core.publisher.MonoError.subscribe(MonoError.java:53)
+		at reactor.core.publisher.MonoDeferContextual.subscribe(MonoDeferContextual.java:55)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxUsingWhen.subscribe(FluxUsingWhen.java:105)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:202)
+		at reactor.core.publisher.MonoFlatMapMany.subscribeOrReturn(MonoFlatMapMany.java:49)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8876)
+		at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:202)
+		at reactor.core.publisher.MonoFlatMapMany.subscribeOrReturn(MonoFlatMapMany.java:49)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8876)
+		at reactor.core.publisher.FluxUsingWhen.subscribe(FluxUsingWhen.java:94)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.request(MonoZip.java:220)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onSubscribe(FluxOnErrorResume.java:74)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.core.publisher.MonoZip.subscribe(MonoZip.java:129)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onNext(FluxPeek.java:200)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.complete(MonoIgnoreThen.java:294)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onNext(MonoIgnoreThen.java:188)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:158)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.signal(MonoZip.java:297)
+		at reactor.core.publisher.MonoZip$ZipInner.onNext(MonoZip.java:478)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.onNext(MonoPeekTerminal.java:180)
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:158)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onNext(FluxMapFuseable.java:299)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onNext(FluxFilterFuseable.java:337)
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.completePossiblyEmpty(Operators.java:2097)
+		at reactor.core.publisher.MonoCollect$CollectSubscriber.onComplete(MonoCollect.java:145)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onComplete(FluxPeekFuseable.java:277)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onComplete(FluxPeekFuseable.java:277)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onComplete(FluxPeekFuseable.java:277)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onComplete(FluxPeekFuseable.java:277)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onComplete(FluxPeekFuseable.java:277)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:126)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2573)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.request(FluxPeekFuseable.java:144)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.request(FluxPeekFuseable.java:144)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.request(FluxPeekFuseable.java:144)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.request(FluxPeekFuseable.java:144)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.request(FluxPeekFuseable.java:144)
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.request(Operators.java:2067)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.request(FluxFilterFuseable.java:411)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.request(FluxMapFuseable.java:360)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onSubscribe(FluxOnErrorResume.java:74)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onSubscribe(FluxContextWrite.java:101)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onSubscribe(FluxMapFuseable.java:265)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableConditionalSubscriber.onSubscribe(FluxFilterFuseable.java:305)
+		at reactor.core.publisher.Operators$BaseFluxToMonoOperator.onSubscribe(Operators.java:2051)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onSubscribe(FluxPeekFuseable.java:178)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onSubscribe(FluxPeekFuseable.java:178)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onSubscribe(FluxPeekFuseable.java:178)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onSubscribe(FluxPeekFuseable.java:178)
+		at reactor.core.publisher.FluxPeekFuseable$PeekFuseableSubscriber.onSubscribe(FluxPeekFuseable.java:178)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onSubscribe(FluxContextWrite.java:101)
+		at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDeferContextual.subscribe(MonoDeferContextual.java:55)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.request(MonoZip.java:220)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onSubscribe(MonoIgnoreThen.java:135)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.core.publisher.MonoZip.subscribe(MonoZip.java:129)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:241)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:204)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onComplete(MonoFlatMap.java:189)
+		at reactor.core.publisher.Operators.complete(Operators.java:137)
+		at reactor.core.publisher.MonoZip.subscribe(MonoZip.java:121)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:82)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.innerNext(FluxConcatMapNoPrefetch.java:259)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapInner.onNext(FluxConcatMap.java:865)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.onNext(MonoPeekTerminal.java:180)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.request(MonoPeekTerminal.java:139)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.request(Operators.java:2331)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:339)
+		at reactor.core.publisher.MonoNext$NextSubscriber.request(MonoNext.java:108)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onSubscribe(MonoNext.java:70)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onSubscribe(FluxConcatMapNoPrefetch.java:164)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.Mono.subscribeWith(Mono.java:4642)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4542)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4478)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.lambda$doConnect$2(HttpHandlerConnector.java:100)
+		at org.springframework.mock.http.client.reactive.MockClientHttpRequest.lambda$writeWith$2(MockClientHttpRequest.java:128)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxConcatIterable$ConcatIterableSubscriber.onComplete(FluxConcatIterable.java:148)
+		at reactor.core.publisher.FluxConcatIterable.subscribe(FluxConcatIterable.java:60)
+		at reactor.core.publisher.MonoFromFluxOperator.subscribe(MonoFromFluxOperator.java:83)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.Operators$MonoInnerProducerBase.complete(Operators.java:2864)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.onComplete(MonoSingle.java:180)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onComplete(FluxMapFuseable.java:152)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2573)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.doOnRequest(MonoSingle.java:103)
+		at reactor.core.publisher.Operators$MonoInnerProducerBase.request(Operators.java:2931)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoSingle$SingleSubscriber.onSubscribe(MonoSingle.java:115)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onSubscribe(FluxMapFuseable.java:96)
+		at reactor.core.publisher.MonoJust.subscribe(MonoJust.java:55)
+		at reactor.core.publisher.FluxFromMonoOperator.subscribe(FluxFromMonoOperator.java:85)
+		at reactor.core.publisher.FluxDeferContextual.subscribe(FluxDeferContextual.java:57)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.Mono.subscribeWith(Mono.java:4642)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4542)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4478)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.doConnect(HttpHandlerConnector.java:114)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.lambda$connect$0(HttpHandlerConnector.java:81)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.MonoSubscribeOn$SubscribeOnSubscriber.run(MonoSubscribeOn.java:126)
+		at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:84)
+		at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:37)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+		at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+2025-11-09 21:16:27 [parallel-9] DEBUG org.springframework.web.HttpLogging - [7ea1ac1] Encoding [{timestamp=Sun Nov 09 21:16:27 SAST 2025, path=/api/v1/wallets/transfer, status=500, error=Internal  (truncated)...]
+2025-11-09 21:16:27 [parallel-9] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [7ea1ac1] Completed 500 INTERNAL_SERVER_ERROR
+2025-11-09 21:16:27 [parallel-9] DEBUG o.s.w.r.f.client.ExchangeFunctions - [757f47f0] [368db557] Response 500 INTERNAL_SERVER_ERROR
+]]></system-out>
+  </testcase>
+  <testcase name="shouldCreateAndRetrieveWallet" classname="com.merchant.wallet.wallet.integration.WalletIntegrationTest" time="0.047">
+    <system-out><![CDATA[2025-11-09 21:16:27 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [7f7f544a] HTTP POST /api/v1/wallets
+2025-11-09 21:16:27 [parallel-10] DEBUG org.springframework.web.HttpLogging - [7f7f544a] Encoding [{currency=ZAR, walletAlias=test_wallet_create, userId=1}]
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [35aa58b2] HTTP POST "/api/v1/wallets"
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [35aa58b2] Mapped to com.merchant.wallet.wallet.controller.WalletController#createWallet(Map)
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [35aa58b2] Content-Type:application/json
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [35aa58b2] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:27 [parallel-10] DEBUG org.springframework.web.HttpLogging - [35aa58b2] Decoded [{currency=ZAR, walletAlias=test_wallet_create, userId=1}]
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [INSERT INTO wallets (user_id, BALANCE, CURRENCY, wallet_alias, ACTIVE) VALUES ($1, $2, $3, $4, $5)]
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [35aa58b2] Using 'application/json' given [*/*] and supported [application/json, application/*+json, application/x-ndjson, text/event-stream]
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [35aa58b2] 0..1 [com.merchant.wallet.wallet.domain.Wallet]
+2025-11-09 21:16:27 [parallel-10] DEBUG org.springframework.web.HttpLogging - [35aa58b2] Encoding [com.merchant.wallet.wallet.domain.Wallet@4769efc2]
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [35aa58b2] Completed 200 OK
+2025-11-09 21:16:27 [parallel-10] DEBUG o.s.w.r.f.client.ExchangeFunctions - [7f7f544a] [bf88db0] Response 200 OK
+]]></system-out>
+  </testcase>
+  <testcase name="shouldProcessTopupEndToEnd" classname="com.merchant.wallet.wallet.integration.WalletIntegrationTest" time="0.544">
+    <system-out><![CDATA[2025-11-09 21:16:27 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [561c031] HTTP POST /api/v1/wallets
+2025-11-09 21:16:27 [parallel-11] DEBUG org.springframework.web.HttpLogging - [561c031] Encoding [{currency=ZAR, walletAlias=test_wallet_topup, userId=2}]
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [1d32c5fd] HTTP POST "/api/v1/wallets"
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [1d32c5fd] Mapped to com.merchant.wallet.wallet.controller.WalletController#createWallet(Map)
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [1d32c5fd] Content-Type:application/json
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [1d32c5fd] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:27 [parallel-11] DEBUG org.springframework.web.HttpLogging - [1d32c5fd] Decoded [{currency=ZAR, walletAlias=test_wallet_topup, userId=2}]
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [INSERT INTO wallets (user_id, BALANCE, CURRENCY, wallet_alias, ACTIVE) VALUES ($1, $2, $3, $4, $5)]
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [1d32c5fd] Using 'application/json' given [*/*] and supported [application/json, application/*+json, application/x-ndjson, text/event-stream]
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.r.m.a.ResponseEntityResultHandler - [1d32c5fd] 0..1 [com.merchant.wallet.wallet.domain.Wallet]
+2025-11-09 21:16:27 [parallel-11] DEBUG org.springframework.web.HttpLogging - [1d32c5fd] Encoding [com.merchant.wallet.wallet.domain.Wallet@1bd4814a]
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [1d32c5fd] Completed 200 OK
+2025-11-09 21:16:27 [parallel-11] DEBUG o.s.w.r.f.client.ExchangeFunctions - [561c031] [7a5a7246] Response 200 OK
+2025-11-09 21:16:27 [main] DEBUG o.s.w.r.f.client.ExchangeFunctions - [29a1dab3] HTTP POST /api/v1/wallets/topup
+2025-11-09 21:16:27 [parallel-12] DEBUG org.springframework.web.HttpLogging - [29a1dab3] Encoding [{amount=100.00, description=Integration test topup, walletAlias=test_wallet_topup}]
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [6efac180] HTTP POST "/api/v1/wallets/topup"
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.w.r.r.m.a.RequestMappingHandlerMapping - [6efac180] Mapped to com.merchant.wallet.wallet.controller.WalletController#topup(Map)
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [6efac180] Content-Type:application/json
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.w.r.r.m.a.RequestBodyMethodArgumentResolver - [6efac180] 0..1 [java.util.Map<java.lang.String, java.lang.Object>]
+2025-11-09 21:16:27 [parallel-12] DEBUG org.springframework.web.HttpLogging - [6efac180] Decoded [{amount=100.00, description=Integration test topup, walletAlias=test_wallet_topup}]
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.wallet_id, wallets.user_id, wallets.merchant_id, wallets.BALANCE, wallets.CURRENCY, wallets.wallet_alias, wallets.ACTIVE FROM wallets WHERE wallets.wallet_alias = $1]
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.r2dbc.core.DefaultDatabaseClient - Executing SQL statement [SELECT wallets.* FROM wallets WHERE wallets.wallet_id = $1 LIMIT 2]
+2025-11-09 21:16:27 [parallel-12] DEBUG o.s.w.r.f.client.ExchangeFunctions - [749b5ab9] HTTP POST http://localhost:8003/api/v1/transactions
+2025-11-09 21:16:27 [reactor-http-nio-2] DEBUG o.s.w.r.f.client.ExchangeFunctions - [4a8eee70] HTTP POST http://localhost:8003/api/v1/transactions
+2025-11-09 21:16:27 [reactor-http-nio-2] DEBUG org.springframework.web.HttpLogging - [6efac180] Resolved [WebClientRequestException: Connection refused: no further information: localhost/127.0.0.1:8003] for HTTP POST /api/v1/wallets/topup
+2025-11-09 21:16:27 [reactor-http-nio-2] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler - [6efac180]  500 Server Error for HTTP POST "/api/v1/wallets/topup"
+org.springframework.web.reactive.function.client.WebClientRequestException: Connection refused: no further information: localhost/127.0.0.1:8003
+	at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:137)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ? Request to POST http://localhost:8003/api/v1/transactions [DefaultWebClient]
+	*__checkpoint ? Handler com.merchant.wallet.wallet.controller.WalletController#topup(Map) [DispatcherHandler]
+	*__checkpoint ? HTTP POST "/api/v1/wallets/topup" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:137)
+		at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93)
+		at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:205)
+		at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:229)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:279)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.maybeOnError(FluxConcatMapNoPrefetch.java:327)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onNext(FluxConcatMapNoPrefetch.java:212)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107)
+		at reactor.core.publisher.SinkManyEmitterProcessor.drain(SinkManyEmitterProcessor.java:476)
+		at reactor.core.publisher.SinkManyEmitterProcessor$EmitterInner.drainParent(SinkManyEmitterProcessor.java:620)
+		at reactor.core.publisher.FluxPublish$PubSubInner.request(FluxPublish.java:874)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:337)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.request(FluxContextWrite.java:136)
+		at reactor.core.publisher.Operators$DeferredSubscription.request(Operators.java:1743)
+		at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:196)
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205)
+		at reactor.netty.http.client.HttpClientConnect$MonoHttpConnect$ClientTransportSubscriber.onError(HttpClientConnect.java:318)
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onError(DefaultPooledConnectionProvider.java:174)
+		at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121)
+		at reactor.netty.internal.shaded.reactor.pool.AbstractPool$Borrower.fail(AbstractPool.java:479)
+		at reactor.netty.internal.shaded.reactor.pool.SimpleDequePool.lambda$drainLoop$9(SimpleDequePool.java:442)
+		at reactor.core.publisher.FluxDoOnEach$DoOnEachSubscriber.onError(FluxDoOnEach.java:186)
+		at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:205)
+		at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnectionAllocator$PooledConnectionInitializer.onError(DefaultPooledConnectionProvider.java:593)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondError(MonoFlatMap.java:241)
+		at reactor.core.publisher.MonoFlatMap$FlatMapInner.onError(MonoFlatMap.java:315)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:106)
+		at reactor.core.publisher.Operators.error(Operators.java:198)
+		at reactor.core.publisher.MonoError.subscribe(MonoError.java:53)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103)
+		at reactor.netty.transport.TransportConnector$MonoChannelPromise.tryFailure(TransportConnector.java:576)
+		at reactor.netty.transport.TransportConnector$MonoChannelPromise.setFailure(TransportConnector.java:522)
+		at reactor.netty.transport.TransportConnector.lambda$doConnect$7(TransportConnector.java:261)
+		at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+		at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+		at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+		at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+		at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:629)
+		at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:118)
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:326)
+		at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:342)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+		at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8003
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:946)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:336)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:339)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2025-11-09 21:16:27 [reactor-http-nio-2] DEBUG org.springframework.web.HttpLogging - [6efac180] Encoding [{timestamp=Sun Nov 09 21:16:27 SAST 2025, path=/api/v1/wallets/topup, status=500, error=Internal Ser (truncated)...]
+2025-11-09 21:16:27 [reactor-http-nio-2] DEBUG o.s.w.s.a.HttpWebHandlerAdapter - [6efac180] Completed 500 INTERNAL_SERVER_ERROR
+2025-11-09 21:16:27 [reactor-http-nio-2] DEBUG o.s.w.r.f.client.ExchangeFunctions - [29a1dab3] [7bf75371] Response 500 INTERNAL_SERVER_ERROR
+]]></system-out>
+  </testcase>
+</testsuite>
