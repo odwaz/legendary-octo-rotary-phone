@@ -21,6 +21,10 @@ spec:
         env:
         - name: SPRING_R2DBC_URL
           value: r2dbc:postgresql://postgres:5432/wallet_db
+        - name: SPRING_R2DBC_USERNAME
+          value: wallet_user
+        - name: SPRING_R2DBC_PASSWORD
+          value: wallet_pass
 ---
 apiVersion: v1
 kind: Service
