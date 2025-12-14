@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: codecorner/api-gateway:3b695fcc
+        image: codecorner/api-gateway:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000

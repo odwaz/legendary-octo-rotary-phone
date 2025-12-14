@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: codecorner/auth-service:3b695fcc
+        image: codecorner/auth-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8001

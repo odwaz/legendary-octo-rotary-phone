@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wallet-service
-        image: codecorner/wallet-service:3b695fcc
+        image: codecorner/wallet-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8002
