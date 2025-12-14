@@ -18,9 +18,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8005
-        env:
-        - name: SPRING_R2DBC_URL
-          value: r2dbc:postgresql://postgres:5432/wallet_db
+        envFrom:
+        - secretRef:
+            name: db-credentials
 ---
 apiVersion: v1
 kind: Service
