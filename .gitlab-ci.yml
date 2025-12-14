@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - docker
+  - update-manifests
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
@@ -71,3 +72,24 @@ docker:webhook-service:
   variables:
     SERVICE_DIR: webhook-service
     SERVICE_NAME: webhook-service
+
+update-manifests:
+  stage: update-manifests
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache git
+    - git config --global user.email "ci@gitlab.com"
+    - git config --global user.name "GitLab CI"
+  script:
+    - git clone https://oauth2:${CI_JOB_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git repo
+    - cd repo
+    - sed -i "s|codecorner/api-gateway:.*|codecorner/api-gateway:${CI_COMMIT_SHORT_SHA}|g" k8s/api-gateway.yaml
+    - sed -i "s|codecorner/auth-service:.*|codecorner/auth-service:${CI_COMMIT_SHORT_SHA}|g" k8s/auth-service.yaml
+    - sed -i "s|codecorner/wallet-service:.*|codecorner/wallet-service:${CI_COMMIT_SHORT_SHA}|g" k8s/wallet-service.yaml
+    - sed -i "s|codecorner/transaction-service:.*|codecorner/transaction-service:${CI_COMMIT_SHORT_SHA}|g" k8s/transaction-service.yaml
+    - sed -i "s|codecorner/webhook-service:.*|codecorner/webhook-service:${CI_COMMIT_SHORT_SHA}|g" k8s/webhook-service.yaml
+    - git add k8s/
+    - git commit -m "Update image tags to ${CI_COMMIT_SHORT_SHA} [skip ci]" || echo "No changes"
+    - git push origin HEAD:${CI_COMMIT_REF_NAME}
+  only:
+    - main
