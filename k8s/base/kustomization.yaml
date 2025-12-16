@@ -1,0 +1,8 @@
+resources:
+  - api-gateway.yaml
+  - auth-service.yaml
+  - wallet-service.yaml
+  - transaction-service.yaml
+  - webhook-service.yaml
+  - postgres.yaml
+  - secrets.yaml
