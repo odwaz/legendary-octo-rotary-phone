@@ -18,6 +18,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8005
+        env:
+        - name: WALLET_SERVICE_URL
+          value: "http://wallet-service:8002"
         envFrom:
         - secretRef:
             name: db-credentials

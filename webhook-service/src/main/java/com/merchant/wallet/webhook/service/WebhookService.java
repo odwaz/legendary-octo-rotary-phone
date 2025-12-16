@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -15,8 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+
 public class WebhookService {
 
+    @Value("${wallet.service.url}")
+    private String walletServiceUrl;
     private static final Logger logger = LoggerFactory.getLogger(WebhookService.class);
     private final WebClient.Builder webClientBuilder;
     private final LocalDateTime startTime;
@@ -43,14 +47,14 @@ public class WebhookService {
                     
                     return webClientBuilder.build()
                             .post()
-                            .uri("http://localhost:8002/api/v1/wallets/topup")
+                            .uri(walletServiceUrl + "/api/v1/wallets/topup")
                             .bodyValue(topupRequest)
                             .retrieve()
                             .bodyToMono(Map.class)
                             .flatMap(transactionResponse -> 
                                 webClientBuilder.build()
                                         .get()
-                                        .uri("http://localhost:8002/api/v1/wallets/" + walletId)
+                                        .uri(walletServiceUrl+"/api/v1/wallets/" + walletId)
                                         .retrieve()
                                         .bodyToMono(Map.class)
                                         .map(walletResponse -> {
@@ -87,7 +91,7 @@ public class WebhookService {
                     
                     return webClientBuilder.build()
                             .put()
-                            .uri("http://localhost:8002/api/v1/wallets/" + walletId + "/balance")
+                            .uri(walletServiceUrl + "/api/v1/wallets/" + walletId + "/balance")
                             .bodyValue(withdrawalRequest)
                             .retrieve()
                             .bodyToMono(Map.class)
@@ -127,7 +131,7 @@ public class WebhookService {
                     
                     return webClientBuilder.build()
                             .post()
-                            .uri("http://localhost:8002/api/v1/wallets/transfer")
+                            .uri(walletServiceUrl + "/api/v1/wallets/transfer")
                             .bodyValue(transferRequest)
                             .retrieve()
                             .bodyToMono(Map.class)

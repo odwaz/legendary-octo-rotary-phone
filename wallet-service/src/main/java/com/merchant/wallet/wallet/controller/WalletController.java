@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -27,6 +28,9 @@ public class WalletController {
     
     @Autowired
     private WebClient.Builder webClientBuilder;
+
+    @Value("${auth.service.url}")
+    private String authServiceUrl;
 
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Wallet>> getWallet(@PathVariable Long id) {
@@ -98,7 +102,7 @@ public class WalletController {
         // Find user by email and get their wallet
         return webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8001/oauth/user/" + email)
+                .uri(authServiceUrl + "/oauth/user/" + email)
                 .retrieve()
                 .bodyToMono(Map.class)
                 .flatMap(user -> {

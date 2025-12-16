@@ -1,0 +1,6 @@
+aws_region     = "us-east-1"
+cluster_name   = "wallet-eks-cluster"
+cluster_version = "1.28"
+db_username    = "wallet_admin"
+db_password    = "Qwbrty!"
+db_name        = "wallet_db"

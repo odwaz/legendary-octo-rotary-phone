@@ -41,6 +41,8 @@ test:
     - docker build -t $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA -t $DOCKER_HUB_USER/$SERVICE_NAME:latest .
     - docker push $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA
     - docker push $DOCKER_HUB_USER/$SERVICE_NAME:latest
+  only:
+    - staging
 
 docker:api-gateway:
   extends: .docker_build

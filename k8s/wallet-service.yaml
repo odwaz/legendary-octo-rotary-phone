@@ -18,6 +18,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8002
+        env:
+        - name:  AUTH_SERVICE_URL
+          value: "http://auth-service:8001"
         envFrom:
         - secretRef:
             name: db-credentials
