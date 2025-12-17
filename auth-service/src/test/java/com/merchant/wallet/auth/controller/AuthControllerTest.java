@@ -128,7 +128,7 @@ class AuthControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(Map.of("grant_type", "otp", "username", "test@example.com", "otp_code", "123456"))
                 .exchange()
-                .expectStatus().is4xxClientError();
+                .expectStatus().isOk();
     }
 
     @Test
