@@ -20,7 +20,7 @@ public class JwtUtil {
 
     private Key key;
 
-    private static final long expiration = 1000 * 60 * 60; // 1 hour
+    private static final long EXPIRATION = 1000L * 60 * 60; // 1 hour
 
     @PostConstruct
     public void init() {
@@ -33,7 +33,7 @@ public class JwtUtil {
                 .setSubject(username)
                 .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }

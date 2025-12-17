@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +21,18 @@ import java.util.Map;
 public class WalletController {
 
     private static final Logger logger = LoggerFactory.getLogger(WalletController.class);
+    private static final String BEARER_PREFIX = "Bearer ";
 
-    @Autowired
-    private WalletService walletService;
-    
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    private final WalletService walletService;
+    private final WebClient.Builder webClientBuilder;
 
     @Value("${auth.service.url}")
     private String authServiceUrl;
+
+    public WalletController(WalletService walletService, WebClient.Builder webClientBuilder) {
+        this.walletService = walletService;
+        this.webClientBuilder = webClientBuilder;
+    }
 
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Wallet>> getWallet(@PathVariable Long id) {
@@ -95,7 +97,7 @@ public class WalletController {
     @Operation(summary = "Get user balance", description = "Get current user's wallet balance")
     public Mono<ResponseEntity<Map>> getUserBalance(@RequestHeader("Authorization") String authHeader) {
         // Extract email from JWT token
-        String token = authHeader.replace("Bearer ", "");
+        String token = authHeader.replace(BEARER_PREFIX, "");
         String email = extractEmailFromToken(token);
         logger.info("[WALLET] → Balance request for user: {}", email);
         
