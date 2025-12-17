@@ -42,17 +42,23 @@ public class AuthService {
     }
     
     public Mono<Void> sendOtp(String email, String password) {
-        logger.info("Attempting to send OTP for {}: {}", EMAIL, email);
+        if (logger.isInfoEnabled()) {
+            logger.info("Attempting to send OTP");
+        }
         return validateCredentials(email, password)
             .then(Mono.fromRunnable(() -> {
                 String otp = String.format("%06d", random.nextInt(1000000));
                 otpStore.put(email, otp);
-                logger.info("📱 OTP for {} {}: {}", EMAIL, email, otp);
+                if (logger.isInfoEnabled()) {
+                    logger.info("📱 OTP generated");
+                }
             }));
     }
 
     public Mono<String> verifyOtp(String email, String otp) {
-        logger.info("Verifying OTP for {}: {}, OTP: {}", EMAIL, email, otp);
+        if (logger.isInfoEnabled()) {
+            logger.info("Verifying OTP");
+        }
         String storedOtp = otpStore.get(email);
         logger.debug("Stored OTP: {}", storedOtp);
         if (storedOtp == null || !storedOtp.equals(otp)) {

@@ -16,6 +16,9 @@ import java.util.Map;
 @Service
 public class WalletService {
 
+    private static final String STATUS = "status";
+    private static final String TRANSACTIONS_URI = "/api/v1/transactions";
+
     private final WalletRepository walletRepository;
     private final WebClient.Builder webClientBuilder;
 
@@ -75,7 +78,7 @@ public class WalletService {
                 });
     }
 
-    public Mono<Map> processPayment(Long fromWalletId, Long toWalletId, BigDecimal amount, String description) {
+    public Mono<Map<String, Object>> processPayment(Long fromWalletId, Long toWalletId, BigDecimal amount, String description) {
         return walletRepository.findById(fromWalletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found")))
                 .zipWith(walletRepository.findById(toWalletId)
@@ -101,11 +104,11 @@ public class WalletService {
                                 transactionRequest.put("amount", amount);
                                 transactionRequest.put("transactionType", "TRANSFER");
                                 transactionRequest.put("description", description);
-                                transactionRequest.put("status", "COMPLETED");
+                                transactionRequest.put(STATUS, "COMPLETED");
                                 
                                 return webClientBuilder.build()
                                         .post()
-                                        .uri(transactionServiceUrl + "/api/v1/transactions")
+                                        .uri(transactionServiceUrl + TRANSACTIONS_URI)
                                         .bodyValue(transactionRequest)
                                         .retrieve()
                                         .bodyToMono(Map.class);
@@ -113,7 +116,7 @@ public class WalletService {
                 });
     }
 
-    public Mono<Map> processTopUp(Long walletId, BigDecimal amount, String description) {
+    public Mono<Map<String, Object>> processTopUp(Long walletId, BigDecimal amount, String description) {
         return walletRepository.findById(walletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found")))
                 .flatMap(wallet -> {
@@ -124,11 +127,11 @@ public class WalletService {
                     transactionRequest.put("amount", amount);
                     transactionRequest.put("transactionType", "DEPOSIT");
                     transactionRequest.put("description", description);
-                    transactionRequest.put("status", "PENDING");
+                    transactionRequest.put(STATUS, "PENDING");
                     
                     return webClientBuilder.build()
                             .post()
-                            .uri(transactionServiceUrl + "/api/v1/transactions")
+                            .uri(transactionServiceUrl + TRANSACTIONS_URI)
                             .bodyValue(transactionRequest)
                             .retrieve()
                             .bodyToMono(Map.class)
@@ -137,15 +140,15 @@ public class WalletService {
                                 return walletRepository.save(wallet)
                                         .then(webClientBuilder.build()
                                                 .put()
-                                                .uri(transactionServiceUrl + "/api/v1/transactions/" + savedTransaction.get("id") + "/status?status=COMPLETED")
+                                                .uri(transactionServiceUrl + TRANSACTIONS_URI + "/" + savedTransaction.get("id") + "/status?status=COMPLETED")
                                                 .retrieve()
                                                 .bodyToMono(Map.class));
                             })
                             .onErrorResume(e -> {
-                                transactionRequest.put("status", "FAILED");
+                                transactionRequest.put(STATUS, "FAILED");
                                 return webClientBuilder.build()
                                         .post()
-                                        .uri(transactionServiceUrl + "/api/v1/transactions")
+                                        .uri(transactionServiceUrl + TRANSACTIONS_URI)
                                         .bodyValue(transactionRequest)
                                         .retrieve()
                                         .bodyToMono(Map.class)
@@ -154,21 +157,21 @@ public class WalletService {
                 });
     }
 
-    public Flux<Map> getTransactionsByWalletId(Long walletId) {
+    public Flux<Map<String, Object>> getTransactionsByWalletId(Long walletId) {
         return webClientBuilder.build()
                 .get()
-                .uri(transactionServiceUrl + "/api/v1/transactions/wallet/" + walletId)
+                .uri(transactionServiceUrl + TRANSACTIONS_URI + "/wallet/" + walletId)
                 .retrieve()
                 .bodyToFlux(Map.class);
     }
 
-    public Mono<Map> processTopUpByAlias(String walletAlias, BigDecimal amount, String description) {
+    public Mono<Map<String, Object>> processTopUpByAlias(String walletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(walletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found with alias: " + walletAlias)))
                 .flatMap(wallet -> processTopUp(wallet.getWalletId(), amount, description));
     }
 
-    public Mono<Map> processPaymentByAlias(String fromWalletAlias, String toWalletAlias, BigDecimal amount, String description) {
+    public Mono<Map<String, Object>> processPaymentByAlias(String fromWalletAlias, String toWalletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(fromWalletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found with alias: " + fromWalletAlias)))
                 .zipWith(walletRepository.findByWalletAlias(toWalletAlias)

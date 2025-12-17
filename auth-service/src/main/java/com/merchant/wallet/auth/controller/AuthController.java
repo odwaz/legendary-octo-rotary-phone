@@ -43,17 +43,18 @@ public class AuthController {
         String identifier = request.get(EMAIL) != null ? request.get(EMAIL) : request.get("phoneNumber");
         String password = request.get(PASSWORD);
         if (logger.isInfoEnabled()) {
-            logger.info("[AUTH] → Send OTP - Request: {}", request.toString().replaceAll("password=[^,}]*", "password=***"));
+            logger.info("[AUTH] → Send OTP request");
         }
-        logger.info("[AUTH] Send OTP request for: {}", identifier);
         
         return authService.sendOtp(identifier, password)
                 .then(Mono.just(ResponseEntity.ok(Map.of(MESSAGE, "OTP sent successfully"))))
-                .doOnSuccess(response -> logger.info("[AUTH] ← OTP sent - Status: {} - User: {} - Response: {}", 
-                    response.getStatusCode().value(), identifier, response.getBody()))
+                .doOnSuccess(response -> {
+                    if (logger.isInfoEnabled()) {
+                        logger.info("[AUTH] ← OTP sent - Status: {}", response.getStatusCode().value());
+                    }
+                })
                 .onErrorReturn(ResponseEntity.badRequest().body(Map.of(ERROR, "Failed to send OTP")))
-                .doOnError(error -> logger.error("[AUTH] OTP failed - Status: 400 - User: {} - Error: {}", 
-                    identifier, error.getMessage()));
+                .doOnError(error -> logger.error("[AUTH] OTP failed - Status: 400 - Error: {}", error.getMessage()));
     }
 
     @PostMapping("/oauth2/token")
@@ -61,15 +62,12 @@ public class AuthController {
     public Mono<ResponseEntity<Map<String, Object>>> token(@RequestBody Map<String, String> request) {
         String grantType = request.get("grant_type");
         if (logger.isInfoEnabled()) {
-            logger.info("[AUTH] → OAuth2 token - Request: {}", request);
+            logger.info("[AUTH] → OAuth2 token request - grant_type: {}", grantType);
         }
-        logger.info("[AUTH] OAuth2 token request - grant_type: {}", grantType);
         
         if ("otp".equals(grantType)) {
             String identifier = request.get("username") != null ? request.get("username") : request.get("phone_number");
             String otp = request.get("otp_code");
-            logger.info("[AUTH] OTP verification for: {}, OTP: {}", identifier, otp);
-
             
             return authService.verifyOtp(identifier, otp)
                     .map(token -> {
@@ -79,7 +77,9 @@ public class AuthController {
                             "expires_in", 3600,
                             "scope", "read write"
                         );
-                        logger.info("[AUTH] ← OAuth2 token - Status: 200 - User: {} - Response: {}", identifier, response);
+                        if (logger.isInfoEnabled()) {
+                            logger.info("[AUTH] ← OAuth2 token - Status: 200");
+                        }
                         Map<String, Object> tokenResponse = Map.of(
                             "access_token", token,
                             "token_type", "Bearer",
@@ -92,8 +92,7 @@ public class AuthController {
                         ERROR, "invalid_grant",
                         "error_description", "Invalid OTP"
                     )))
-                    .doOnError(error -> logger.error("[AUTH] OAuth2 token - Status: 400 - User: {} - Error: {}", 
-                        identifier, error.getMessage()));
+                    .doOnError(error -> logger.error("[AUTH] OAuth2 token - Status: 400 - Error: {}", error.getMessage()));
         }
         
         Map<String, Object> errorResponse = Map.of(
