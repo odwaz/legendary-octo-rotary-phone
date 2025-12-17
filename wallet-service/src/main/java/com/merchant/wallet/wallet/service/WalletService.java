@@ -16,14 +16,16 @@ import java.util.Map;
 @Service
 public class WalletService {
 
-    @Autowired
-    private WalletRepository walletRepository;
-
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    private final WalletRepository walletRepository;
+    private final WebClient.Builder webClientBuilder;
 
     @Value("${transaction.service.url}")
     private String transactionServiceUrl;
+
+    public WalletService(WalletRepository walletRepository, WebClient.Builder webClientBuilder) {
+        this.walletRepository = walletRepository;
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Mono<Wallet> getWalletById(Long walletId) {
         return walletRepository.findById(walletId);

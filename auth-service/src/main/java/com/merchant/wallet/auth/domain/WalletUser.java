@@ -32,7 +32,7 @@ public class WalletUser {
 
 	private String password;
 
-	@Pattern(regexp = "^(\\+27|0)[0-9]{9}$")
+	@Pattern(regexp = "^(\\+27|0)\\d{9}$")
 	@Column("phone_number")
 	private String phoneNumber;
 	

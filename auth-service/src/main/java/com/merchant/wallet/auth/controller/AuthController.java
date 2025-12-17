@@ -17,8 +17,11 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/oauth/login")
     public Mono<ResponseEntity<Map<String, String>>> login(@RequestBody Map<String, String> request) {
@@ -35,8 +38,10 @@ public class AuthController {
     public Mono<ResponseEntity<Map<String, String>>> sendOtp(@RequestBody Map<String, String> request) {
         String identifier = request.get("email") != null ? request.get("email") : request.get("phoneNumber");
         String password = request.get("password");
-        logger.info("[AUTH] → Send OTP - Request: {}", request.toString().replaceAll("password=[^,}]*", "password=***"));
-        System.out.println("[AUTH] Send OTP request for: " + identifier);
+        if (logger.isInfoEnabled()) {
+            logger.info("[AUTH] → Send OTP - Request: {}", request.replaceAll("password=[^,}]*", "password=***"));
+        }
+        logger.info("[AUTH] Send OTP request for: {}", identifier);
         
         return authService.sendOtp(identifier, password)
                 .then(Mono.just(ResponseEntity.ok(Map.of("message", "OTP sent successfully"))))
@@ -49,34 +54,36 @@ public class AuthController {
 
     @PostMapping("/oauth2/token")
     @Operation(summary = "OAuth2 Token", description = "Get access token using OTP grant type")
-    public Mono<ResponseEntity<Map>> token(@RequestBody Map<String, String> request) {
+    public Mono<ResponseEntity<Map<String, Object>>> token(@RequestBody Map<String, String> request) {
         String grantType = request.get("grant_type");
-        logger.info("[AUTH] → OAuth2 token - Request: {}", request.toString());
-        System.out.println("[AUTH] OAuth2 token request - grant_type: " + grantType);
+        if (logger.isInfoEnabled()) {
+            logger.info("[AUTH] → OAuth2 token - Request: {}", request);
+        }
+        logger.info("[AUTH] OAuth2 token request - grant_type: {}", grantType);
         
         if ("otp".equals(grantType)) {
             String identifier = request.get("username") != null ? request.get("username") : request.get("phone_number");
             String otp = request.get("otp_code");
             logger.info("[AUTH] OTP verification for: {}, OTP: {}", identifier, otp);
-            System.out.println("[AUTH] OTP verification for: " + identifier + ", OTP: " + otp);
+
             
             return authService.verifyOtp(identifier, otp)
                     .map(token -> {
-                        Map response = Map.of(
+                        Map<String, Object> response = Map.of(
                             "access_token", token.substring(0, 20) + "...",
                             "token_type", "Bearer",
                             "expires_in", 3600,
                             "scope", "read write"
                         );
                         logger.info("[AUTH] ← OAuth2 token - Status: 200 - User: {} - Response: {}", identifier, response);
-                        return ResponseEntity.ok((Map) Map.of(
+                        return ResponseEntity.ok(Map.of(
                             "access_token", token,
                             "token_type", "Bearer",
                             "expires_in", 3600,
                             "scope", "read write"
                         ));
                     })
-                    .onErrorReturn(ResponseEntity.badRequest().body((Map) Map.of(
+                    .onErrorReturn(ResponseEntity.badRequest().body(Map.of(
                         "error", "invalid_grant",
                         "error_description", "Invalid OTP"
                     )))
@@ -84,7 +91,7 @@ public class AuthController {
                         identifier, error.getMessage()));
         }
         
-        return Mono.just(ResponseEntity.badRequest().body((Map) Map.of(
+        return Mono.just(ResponseEntity.badRequest().body(Map.of(
             "error", "unsupported_grant_type",
             "error_description", "Grant type not supported"
         )));
@@ -104,9 +111,9 @@ public class AuthController {
     }
     
     @GetMapping("/oauth/user/{email}")
-    public Mono<ResponseEntity<Map>> getUserByEmail(@PathVariable String email) {
+    public Mono<ResponseEntity<Map<String, Object>>> getUserByEmail(@PathVariable String email) {
         return authService.getUserByEmail(email)
-                .map(user -> ResponseEntity.ok((Map) Map.of(
+                .map(user -> ResponseEntity.ok(Map.of(
                     "id", user.getId(),
                     "email", user.getEmail(),
                     "role", user.getRole()

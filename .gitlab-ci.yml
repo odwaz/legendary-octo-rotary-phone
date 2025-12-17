@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - sonarqube
   - docker
 
 variables:
@@ -28,6 +29,16 @@ test:
     reports:
       junit:
         - "*/target/surefire-reports/TEST-*.xml"
+
+sonarqube:
+  stage: sonarqube
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=wallet-microservices -Dsonar.organization=$SONAR_ORGANIZATION
+  only:
+    - dev
+    - staging
+    - main
 
 .docker_build:
   stage: docker

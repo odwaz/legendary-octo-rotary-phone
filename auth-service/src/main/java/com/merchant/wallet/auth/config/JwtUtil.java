@@ -20,7 +20,7 @@ public class JwtUtil {
 
     private Key key;
 
-    private final long expiration = 1000 * 60 * 60; // 1 hour
+    private static final long expiration = 1000 * 60 * 60; // 1 hour
 
     @PostConstruct
     public void init() {
