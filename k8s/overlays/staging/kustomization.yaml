@@ -1,0 +1,19 @@
+namespace: wallet-microservices
+bases:
+  - ../../base
+images:
+  - name: codecorner/api-gateway
+    newName: 095792718121.dkr.ecr.us-east-1.amazonaws.com/wallet-microservices
+    newTag: api-gateway-latest
+  - name: codecorner/auth-service
+    newName: 095792718121.dkr.ecr.us-east-1.amazonaws.com/wallet-microservices
+    newTag: auth-service-latest
+  - name: codecorner/wallet-service
+    newName: 095792718121.dkr.ecr.us-east-1.amazonaws.com/wallet-microservices
+    newTag: wallet-service-latest
+  - name: codecorner/transaction-service
+    newName: 095792718121.dkr.ecr.us-east-1.amazonaws.com/wallet-microservices
+    newTag: transaction-service-latest
+  - name: codecorner/webhook-service
+    newName: 095792718121.dkr.ecr.us-east-1.amazonaws.com/wallet-microservices
+    newTag: webhook-service-latest

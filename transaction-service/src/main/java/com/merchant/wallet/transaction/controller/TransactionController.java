@@ -16,8 +16,11 @@ public class TransactionController {
 
     private static final Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
+
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
 
     @PostMapping
     public Mono<ResponseEntity<Transaction>> createTransaction(@RequestBody Transaction transaction) {

@@ -3,6 +3,7 @@ package com.merchant.wallet.wallet.service;
 import com.merchant.wallet.wallet.domain.Wallet;
 import com.merchant.wallet.wallet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -15,11 +16,16 @@ import java.util.Map;
 @Service
 public class WalletService {
 
-    @Autowired
-    private WalletRepository walletRepository;
+    private final WalletRepository walletRepository;
+    private final WebClient.Builder webClientBuilder;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    @Value("${transaction.service.url}")
+    private String transactionServiceUrl;
+
+    public WalletService(WalletRepository walletRepository, WebClient.Builder webClientBuilder) {
+        this.walletRepository = walletRepository;
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public Mono<Wallet> getWalletById(Long walletId) {
         return walletRepository.findById(walletId);
@@ -99,7 +105,7 @@ public class WalletService {
                                 
                                 return webClientBuilder.build()
                                         .post()
-                                        .uri("http://localhost:8003/api/v1/transactions")
+                                        .uri(transactionServiceUrl + "/api/v1/transactions")
                                         .bodyValue(transactionRequest)
                                         .retrieve()
                                         .bodyToMono(Map.class);
@@ -122,7 +128,7 @@ public class WalletService {
                     
                     return webClientBuilder.build()
                             .post()
-                            .uri("http://localhost:8003/api/v1/transactions")
+                            .uri(transactionServiceUrl + "/api/v1/transactions")
                             .bodyValue(transactionRequest)
                             .retrieve()
                             .bodyToMono(Map.class)
@@ -131,7 +137,7 @@ public class WalletService {
                                 return walletRepository.save(wallet)
                                         .then(webClientBuilder.build()
                                                 .put()
-                                                .uri("http://localhost:8003/api/v1/transactions/" + savedTransaction.get("id") + "/status?status=COMPLETED")
+                                                .uri(transactionServiceUrl + "/api/v1/transactions/" + savedTransaction.get("id") + "/status?status=COMPLETED")
                                                 .retrieve()
                                                 .bodyToMono(Map.class));
                             })
@@ -139,7 +145,7 @@ public class WalletService {
                                 transactionRequest.put("status", "FAILED");
                                 return webClientBuilder.build()
                                         .post()
-                                        .uri("http://localhost:8003/api/v1/transactions")
+                                        .uri(transactionServiceUrl + "/api/v1/transactions")
                                         .bodyValue(transactionRequest)
                                         .retrieve()
                                         .bodyToMono(Map.class)
@@ -151,7 +157,7 @@ public class WalletService {
     public Flux<Map> getTransactionsByWalletId(Long walletId) {
         return webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8003/api/v1/transactions/wallet/" + walletId)
+                .uri(transactionServiceUrl + "/api/v1/transactions/wallet/" + walletId)
                 .retrieve()
                 .bodyToFlux(Map.class);
     }

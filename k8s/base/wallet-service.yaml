@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wallet-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wallet-service
+  template:
+    metadata:
+      labels:
+        app: wallet-service
+    spec:
+      containers:
+      - name: wallet-service
+        image: codecorner/wallet-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8002
+        env:
+          - name: AUTH_SERVICE_URL
+            value: "http://auth-service:8001"
+          - name: TRANSACTION_SERVICE_URL
+            value: "http://transaction-service:8003"
+
+        envFrom:
+        - secretRef:
+            name: db-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wallet-service
+spec:
+  selector:
+    app: wallet-service
+  ports:
+  - port: 8002

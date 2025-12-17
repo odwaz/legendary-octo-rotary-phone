@@ -1,7 +1,8 @@
 package com.merchant.wallet.auth.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.merchant.wallet.auth.config.JwtUtil;
@@ -15,17 +16,20 @@ import java.util.Random;
 @Service
 public class AuthService {
 
-    @Autowired
-    private WalletUserRepository walletUserRepository;
-    
-    @Autowired
-    private JwtUtil jwtUtil;
-    
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+    private static final String EMAIL = "email";
+
+    private final WalletUserRepository walletUserRepository;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
     private final Map<String, String> otpStore = new ConcurrentHashMap<>();
     private final Random random = new Random();
+
+    public AuthService(WalletUserRepository walletUserRepository, JwtUtil jwtUtil, PasswordEncoder passwordEncoder) {
+        this.walletUserRepository = walletUserRepository;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public Mono<Void> validateCredentials(String email, String password) {
         return walletUserRepository.findByEmail(email)
@@ -39,24 +43,24 @@ public class AuthService {
     }
     
     public Mono<Void> sendOtp(String email, String password) {
-        System.out.println("Attempting to send OTP for email: " + email);
+        logger.info("Attempting to send OTP for {}: {}", EMAIL, email);
         return validateCredentials(email, password)
             .then(Mono.fromRunnable(() -> {
                 String otp = String.format("%06d", random.nextInt(1000000));
                 otpStore.put(email, otp);
-                System.out.println("📱 OTP for " + email + ": " + otp);
+                logger.info("📱 OTP for {} {}: {}", EMAIL, email, otp);
             }));
     }
 
     public Mono<String> verifyOtp(String email, String otp) {
-        System.out.println("Verifying OTP for email: " + email + ", OTP: " + otp);
+        logger.info("Verifying OTP for {}: {}, OTP: {}", EMAIL, email, otp);
         String storedOtp = otpStore.get(email);
-        System.out.println("Stored OTP: " + storedOtp);
+        logger.debug("Stored OTP: {}", storedOtp);
         if (storedOtp == null || !storedOtp.equals(otp)) {
-            System.out.println("OTP verification failed");
+            logger.warn("OTP verification failed");
             return Mono.error(new RuntimeException("Invalid OTP"));
         }
-        System.out.println("OTP verified successfully");
+        logger.info("OTP verified successfully");
         
         return walletUserRepository.findByEmail(email)
             .map(user -> user.getRole() != null ? user.getRole() : "USER")
@@ -71,7 +75,7 @@ public class AuthService {
         return walletUserRepository.findByEmail(email)
             .hasElement()
             .flatMap(exists -> {
-                if (exists) {
+                if (Boolean.TRUE.equals(exists)) {
                     return Mono.error(new RuntimeException("Email already exists"));
                 }
                 WalletUser user = new WalletUser();

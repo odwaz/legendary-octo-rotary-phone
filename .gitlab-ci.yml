@@ -1,11 +1,11 @@
 stages:
   - build
   - test
+  - sonarqube
   - docker
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-
 cache:
   paths:
     - .m2/repository
@@ -30,18 +30,44 @@ test:
       junit:
         - "*/target/surefire-reports/TEST-*.xml"
 
+sonarqube:
+  stage: sonarqube
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=wallet-microservices -Dsonar.organization=$SONAR_ORGANIZATION
+  only:
+    - dev
+    - staging
+    - main
+
 .docker_build:
   stage: docker
   image: docker:24
   services:
     - docker:24-dind
   before_script:
-    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_TOKEN
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "staging" ]; then
+        apk add --no-cache aws-cli
+        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+      else
+        docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_TOKEN
+      fi
   script:
     - cd $SERVICE_DIR
-    - docker build -t $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA -t $DOCKER_HUB_USER/$SERVICE_NAME:latest .
-    - docker push $DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA
-    - docker push $DOCKER_HUB_USER/$SERVICE_NAME:latest
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "staging" ]; then
+        IMAGE="$ECR_REGISTRY/wallet-microservices:$SERVICE_NAME-$CI_COMMIT_SHORT_SHA"
+        IMAGE_LATEST="$ECR_REGISTRY/wallet-microservices:$SERVICE_NAME-latest"
+      else
+        IMAGE="$DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA"
+        IMAGE_LATEST="$DOCKER_HUB_USER/$SERVICE_NAME:latest"
+      fi
+    - docker build -t "$IMAGE" -t "$IMAGE_LATEST" .
+    - docker push "$IMAGE"
+    - docker push "$IMAGE_LATEST"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
 
 docker:api-gateway:
   extends: .docker_build
@@ -72,3 +98,4 @@ docker:webhook-service:
   variables:
     SERVICE_DIR: webhook-service
     SERVICE_NAME: webhook-service
+

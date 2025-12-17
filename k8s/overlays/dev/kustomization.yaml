@@ -1,0 +1,14 @@
+namespace: wallet-microservices
+bases:
+  - ../../base
+images:
+  - name: codecorner/api-gateway
+    newTag: latest
+  - name: codecorner/auth-service
+    newTag: latest
+  - name: codecorner/wallet-service
+    newTag: latest
+  - name: codecorner/transaction-service
+    newTag: latest
+  - name: codecorner/webhook-service
+    newTag: latest
