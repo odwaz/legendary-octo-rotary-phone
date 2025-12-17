@@ -68,6 +68,9 @@ public class AuthController {
         if ("otp".equals(grantType)) {
             String identifier = request.get("username") != null ? request.get("username") : request.get("phone_number");
             String otp = request.get("otp_code");
+            if (logger.isInfoEnabled()) {
+                logger.info("[AUTH] OTP verification request");
+            }
             
             return authService.verifyOtp(identifier, otp)
                     .map(token -> {

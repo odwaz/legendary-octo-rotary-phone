@@ -76,6 +76,7 @@ public class WalletService {
                 });
     }
 
+    @SuppressWarnings("rawtypes")
     public Mono<Map> processPayment(Long fromWalletId, Long toWalletId, BigDecimal amount, String description) {
         return walletRepository.findById(fromWalletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found")))
@@ -114,6 +115,7 @@ public class WalletService {
                 });
     }
 
+    @SuppressWarnings("rawtypes")
     public Mono<Map> processTopUp(Long walletId, BigDecimal amount, String description) {
         return walletRepository.findById(walletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found")))
@@ -155,6 +157,7 @@ public class WalletService {
                 });
     }
 
+    @SuppressWarnings("rawtypes")
     public Flux<Map> getTransactionsByWalletId(Long walletId) {
         return webClientBuilder.build()
                 .get()
@@ -163,12 +166,14 @@ public class WalletService {
                 .bodyToFlux(Map.class);
     }
 
+    @SuppressWarnings("rawtypes")
     public Mono<Map> processTopUpByAlias(String walletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(walletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found with alias: " + walletAlias)))
                 .flatMap(wallet -> processTopUp(wallet.getWalletId(), amount, description));
     }
 
+    @SuppressWarnings("rawtypes")
     public Mono<Map> processPaymentByAlias(String fromWalletAlias, String toWalletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(fromWalletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found with alias: " + fromWalletAlias)))
