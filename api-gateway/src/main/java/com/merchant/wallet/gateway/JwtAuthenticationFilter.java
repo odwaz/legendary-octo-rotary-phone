@@ -22,6 +22,12 @@ import java.util.Map;
 public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+    private static final String BEARER_PREFIX = "Bearer ";
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String CONTENT_TYPE = "Content-Type";
+    private static final int BEARER_PREFIX_LENGTH = 7;
+    private static final int JWT_PARTS_COUNT = 3;
+    private static final long MILLIS_TO_SECONDS = 1000L;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -34,12 +40,12 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        String authHeader = request.getHeaders().getFirst("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        String authHeader = request.getHeaders().getFirst(AUTHORIZATION);
+        if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             return handleUnauthorized(exchange, "Missing or invalid Authorization header");
         }
 
-        String token = authHeader.substring(7);
+        String token = authHeader.substring(BEARER_PREFIX_LENGTH);
         if (!isTokenValid(token)) {
             return handleUnauthorized(exchange, "Token expired or invalid");
         }
@@ -50,13 +56,13 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     private boolean isTokenValid(String token) {
         try {
             String[] parts = token.split("\\.");
-            if (parts.length != 3) return false;
+            if (parts.length != JWT_PARTS_COUNT) return false;
 
             String payload = new String(Base64.getDecoder().decode(parts[1]));
             Map<String, Object> claims = objectMapper.readValue(payload, Map.class);
             
             Long exp = ((Number) claims.get("exp")).longValue();
-            long currentTime = System.currentTimeMillis() / 1000;
+            long currentTime = System.currentTimeMillis() / MILLIS_TO_SECONDS;
             
             return exp > currentTime;
         } catch (Exception e) {
@@ -68,7 +74,7 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
     private Mono<Void> handleUnauthorized(ServerWebExchange exchange, String message) {
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
-        response.getHeaders().add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        response.getHeaders().add(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
         String body = "{\"error\":\"Unauthorized\",\"message\":\"" + message + "\"}";
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes());

@@ -16,6 +16,10 @@ import java.util.Map;
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final String PASSWORD = "password";
+    private static final String EMAIL = "email";
+    private static final String MESSAGE = "message";
+    private static final String ERROR = "error";
 
     private final AuthService authService;
 
@@ -25,29 +29,29 @@ public class AuthController {
 
     @PostMapping("/oauth/login")
     public Mono<ResponseEntity<Map<String, String>>> login(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
+        String email = request.get(EMAIL);
+        String password = request.get(PASSWORD);
         
         return authService.sendOtp(email, password)
-                .then(Mono.just(ResponseEntity.ok(Map.of("message", "Credentials verified. OTP sent to your phone."))))
-                .onErrorReturn(ResponseEntity.badRequest().body(Map.of("error", "Invalid credentials")));
+                .then(Mono.just(ResponseEntity.ok(Map.of(MESSAGE, "Credentials verified. OTP sent to your phone."))))
+                .onErrorReturn(ResponseEntity.badRequest().body(Map.of(ERROR, "Invalid credentials")));
     }
 
     @PostMapping("/oauth/send-otp")
     @Operation(summary = "Send OTP", description = "Send OTP to user's phone after credential verification")
     public Mono<ResponseEntity<Map<String, String>>> sendOtp(@RequestBody Map<String, String> request) {
-        String identifier = request.get("email") != null ? request.get("email") : request.get("phoneNumber");
-        String password = request.get("password");
+        String identifier = request.get(EMAIL) != null ? request.get(EMAIL) : request.get("phoneNumber");
+        String password = request.get(PASSWORD);
         if (logger.isInfoEnabled()) {
             logger.info("[AUTH] → Send OTP - Request: {}", request.toString().replaceAll("password=[^,}]*", "password=***"));
         }
         logger.info("[AUTH] Send OTP request for: {}", identifier);
         
         return authService.sendOtp(identifier, password)
-                .then(Mono.just(ResponseEntity.ok(Map.of("message", "OTP sent successfully"))))
+                .then(Mono.just(ResponseEntity.ok(Map.of(MESSAGE, "OTP sent successfully"))))
                 .doOnSuccess(response -> logger.info("[AUTH] ← OTP sent - Status: {} - User: {} - Response: {}", 
                     response.getStatusCode().value(), identifier, response.getBody()))
-                .onErrorReturn(ResponseEntity.badRequest().body(Map.of("error", "Failed to send OTP")))
+                .onErrorReturn(ResponseEntity.badRequest().body(Map.of(ERROR, "Failed to send OTP")))
                 .doOnError(error -> logger.error("[AUTH] OTP failed - Status: 400 - User: {} - Error: {}", 
                     identifier, error.getMessage()));
     }
@@ -85,7 +89,7 @@ public class AuthController {
                         return ResponseEntity.ok(tokenResponse);
                     })
                     .onErrorReturn(ResponseEntity.badRequest().body(Map.of(
-                        "error", "invalid_grant",
+                        ERROR, "invalid_grant",
                         "error_description", "Invalid OTP"
                     )))
                     .doOnError(error -> logger.error("[AUTH] OAuth2 token - Status: 400 - User: {} - Error: {}", 
@@ -93,7 +97,7 @@ public class AuthController {
         }
         
         Map<String, Object> errorResponse = Map.of(
-            "error", "unsupported_grant_type",
+            ERROR, "unsupported_grant_type",
             "error_description", "Grant type not supported"
         );
         return Mono.just(ResponseEntity.badRequest().body(errorResponse));
@@ -102,14 +106,14 @@ public class AuthController {
     @PostMapping("/oauth/register")
     @Operation(summary = "Register User", description = "Register a new user account")
     public Mono<ResponseEntity<Map<String, String>>> register(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
+        String email = request.get(EMAIL);
+        String password = request.get(PASSWORD);
         String fullName = request.get("fullName");
         String phoneNumber = request.get("phoneNumber");
         
         return authService.registerUser(email, password, fullName, phoneNumber)
-                .then(Mono.just(ResponseEntity.ok(Map.of("message", "User registered successfully"))))
-                .onErrorReturn(ResponseEntity.badRequest().body(Map.of("error", "Registration failed")));
+                .then(Mono.just(ResponseEntity.ok(Map.of(MESSAGE, "User registered successfully"))))
+                .onErrorReturn(ResponseEntity.badRequest().body(Map.of(ERROR, "Registration failed")));
     }
     
     @GetMapping("/oauth/user/{email}")
@@ -118,7 +122,7 @@ public class AuthController {
                 .map(user -> {
                     Map<String, Object> userResponse = Map.of(
                         "id", user.getId(),
-                        "email", user.getEmail(),
+                        EMAIL, user.getEmail(),
                         "role", user.getRole()
                     );
                     return ResponseEntity.ok(userResponse);

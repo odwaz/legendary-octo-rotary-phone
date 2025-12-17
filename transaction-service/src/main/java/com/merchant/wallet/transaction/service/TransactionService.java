@@ -2,7 +2,6 @@ package com.merchant.wallet.transaction.service;
 
 import com.merchant.wallet.transaction.domain.Transaction;
 import com.merchant.wallet.transaction.repository.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,8 +11,11 @@ import java.time.LocalDateTime;
 @Service
 public class TransactionService {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
+
+    public TransactionService(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
 
     public Mono<Transaction> createTransaction(Transaction transaction) {
         transaction.setTransactionId(UUID.randomUUID().toString());
