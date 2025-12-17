@@ -39,7 +39,7 @@ public class AuthController {
         String identifier = request.get("email") != null ? request.get("email") : request.get("phoneNumber");
         String password = request.get("password");
         if (logger.isInfoEnabled()) {
-            logger.info("[AUTH] → Send OTP - Request: {}", request.replaceAll("password=[^,}]*", "password=***"));
+            logger.info("[AUTH] → Send OTP - Request: {}", request.toString().replaceAll("password=[^,}]*", "password=***"));
         }
         logger.info("[AUTH] Send OTP request for: {}", identifier);
         
@@ -76,12 +76,13 @@ public class AuthController {
                             "scope", "read write"
                         );
                         logger.info("[AUTH] ← OAuth2 token - Status: 200 - User: {} - Response: {}", identifier, response);
-                        return ResponseEntity.ok(Map.of(
+                        Map<String, Object> tokenResponse = Map.of(
                             "access_token", token,
                             "token_type", "Bearer",
                             "expires_in", 3600,
                             "scope", "read write"
-                        ));
+                        );
+                        return ResponseEntity.ok(tokenResponse);
                     })
                     .onErrorReturn(ResponseEntity.badRequest().body(Map.of(
                         "error", "invalid_grant",
@@ -91,10 +92,11 @@ public class AuthController {
                         identifier, error.getMessage()));
         }
         
-        return Mono.just(ResponseEntity.badRequest().body(Map.of(
+        Map<String, Object> errorResponse = Map.of(
             "error", "unsupported_grant_type",
             "error_description", "Grant type not supported"
-        )));
+        );
+        return Mono.just(ResponseEntity.badRequest().body(errorResponse));
     }
 
     @PostMapping("/oauth/register")
@@ -113,11 +115,14 @@ public class AuthController {
     @GetMapping("/oauth/user/{email}")
     public Mono<ResponseEntity<Map<String, Object>>> getUserByEmail(@PathVariable String email) {
         return authService.getUserByEmail(email)
-                .map(user -> ResponseEntity.ok(Map.of(
-                    "id", user.getId(),
-                    "email", user.getEmail(),
-                    "role", user.getRole()
-                )))
+                .map(user -> {
+                    Map<String, Object> userResponse = Map.of(
+                        "id", user.getId(),
+                        "email", user.getEmail(),
+                        "role", user.getRole()
+                    );
+                    return ResponseEntity.ok(userResponse);
+                })
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 

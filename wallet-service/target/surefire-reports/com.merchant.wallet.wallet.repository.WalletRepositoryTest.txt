@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.merchant.wallet.wallet.repository.WalletRepositoryTest
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.713 s -- in com.merchant.wallet.wallet.repository.WalletRepositoryTest

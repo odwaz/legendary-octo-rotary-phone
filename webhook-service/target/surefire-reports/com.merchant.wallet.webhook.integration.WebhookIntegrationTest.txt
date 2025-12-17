@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.merchant.wallet.webhook.integration.WebhookIntegrationTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.233 s -- in com.merchant.wallet.webhook.integration.WebhookIntegrationTest

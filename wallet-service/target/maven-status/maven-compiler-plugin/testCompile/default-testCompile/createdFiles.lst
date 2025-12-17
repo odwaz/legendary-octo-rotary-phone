@@ -1,7 +1,0 @@
-com\merchant\wallet\wallet\repository\WalletRepositoryTest.class
-com\merchant\wallet\wallet\service\WalletCreatorTest.class
-com\merchant\wallet\wallet\WalletServiceApplicationTest.class
-com\merchant\wallet\wallet\integration\WalletIntegrationTest.class
-com\merchant\wallet\wallet\controller\WalletControllerTest.class
-com\merchant\wallet\wallet\service\BalanceValidatorTest.class
-com\merchant\wallet\wallet\service\BalanceCalculatorTest.class
