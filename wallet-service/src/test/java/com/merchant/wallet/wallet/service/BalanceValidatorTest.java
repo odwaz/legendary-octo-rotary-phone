@@ -28,17 +28,13 @@ class BalanceValidatorTest {
     void shouldRejectNegativeAmount() {
         BalanceValidator validator = new BalanceValidator();
         
-        assertThrows(IllegalArgumentException.class, () -> {
-            validator.validateAmount(new BigDecimal("-10.00"));
-        });
+        assertThrows(IllegalArgumentException.class, () -> validator.validateAmount(new BigDecimal("-10.00")));
     }
     
     @Test
     void shouldAcceptPositiveAmount() {
         BalanceValidator validator = new BalanceValidator();
         
-        assertDoesNotThrow(() -> {
-            validator.validateAmount(new BigDecimal("10.00"));
-        });
+        assertDoesNotThrow(() -> validator.validateAmount(new BigDecimal("10.00")));
     }
 }

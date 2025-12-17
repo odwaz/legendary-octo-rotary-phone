@@ -26,4 +26,18 @@ public class OtpGrantAuthenticationToken extends OAuth2AuthorizationGrantAuthent
     public String getOtpCode() {
         return otpCode;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof OtpGrantAuthenticationToken)) return false;
+        if (!super.equals(obj)) return false;
+        OtpGrantAuthenticationToken that = (OtpGrantAuthenticationToken) obj;
+        return java.util.Objects.equals(phoneNumber, that.phoneNumber) && java.util.Objects.equals(otpCode, that.otpCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(super.hashCode(), phoneNumber, otpCode);
+    }
 }
