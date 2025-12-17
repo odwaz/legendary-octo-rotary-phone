@@ -22,6 +22,8 @@ public class WalletController {
 
     private static final Logger logger = LoggerFactory.getLogger(WalletController.class);
     private static final String BEARER_PREFIX = "Bearer ";
+    private static final String CURRENCY = "currency";
+    private static final String AMOUNT = "amount";
 
     private final WalletService walletService;
     private final WebClient.Builder webClientBuilder;
@@ -52,7 +54,7 @@ public class WalletController {
     @Operation(summary = "Create wallet", description = "Create a new wallet for a user")
     public Mono<ResponseEntity<Wallet>> createWallet(@RequestBody Map<String, Object> request) {
         Long userId = Long.valueOf(request.get("userId").toString());
-        String currency = (String) request.getOrDefault("currency", "ZAR");
+        String currency = (String) request.getOrDefault(CURRENCY, "ZAR");
         String walletAlias = (String) request.get("walletAlias");
         
         return walletService.createWallet(userId, currency, walletAlias)
@@ -63,7 +65,7 @@ public class WalletController {
     public Mono<ResponseEntity<Wallet>> updateBalance(
             @PathVariable Long id,
             @RequestBody Map<String, Object> request) {
-        BigDecimal amount = new BigDecimal(request.get("amount").toString());
+        BigDecimal amount = new BigDecimal(request.get(AMOUNT).toString());
         String operation = (String) request.get("operation");
         
         return walletService.updateBalance(id, amount, operation)
@@ -72,9 +74,9 @@ public class WalletController {
 
     @PostMapping("/topup")
     @Operation(summary = "Top up wallet", description = "Add funds to a wallet using wallet alias")
-    public Mono<ResponseEntity<Map>> topup(@RequestBody Map<String, Object> request) {
+    public Mono<ResponseEntity<Map<String, Object>>> topup(@RequestBody Map<String, Object> request) {
         String walletAlias = (String) request.get("walletAlias");
-        BigDecimal amount = new BigDecimal(request.get("amount").toString());
+        BigDecimal amount = new BigDecimal(request.get(AMOUNT).toString());
         String description = (String) request.getOrDefault("description", "Top up");
         
         return walletService.processTopUpByAlias(walletAlias, amount, description)
@@ -83,10 +85,10 @@ public class WalletController {
 
     @PostMapping("/transfer")
     @Operation(summary = "Transfer funds", description = "Transfer funds between wallets using aliases")
-    public Mono<ResponseEntity<Map>> transfer(@RequestBody Map<String, Object> request) {
+    public Mono<ResponseEntity<Map<String, Object>>> transfer(@RequestBody Map<String, Object> request) {
         String fromWalletAlias = (String) request.get("fromWalletAlias");
         String toWalletAlias = (String) request.get("toWalletAlias");
-        BigDecimal amount = new BigDecimal(request.get("amount").toString());
+        BigDecimal amount = new BigDecimal(request.get(AMOUNT).toString());
         String description = (String) request.getOrDefault("description", "Transfer");
         
         return walletService.processPaymentByAlias(fromWalletAlias, toWalletAlias, amount, description)
@@ -95,7 +97,7 @@ public class WalletController {
 
     @GetMapping("/user/balance")
     @Operation(summary = "Get user balance", description = "Get current user's wallet balance")
-    public Mono<ResponseEntity<Map>> getUserBalance(@RequestHeader("Authorization") String authHeader) {
+    public Mono<ResponseEntity<Map<String, Object>>> getUserBalance(@RequestHeader("Authorization") String authHeader) {
         // Extract email from JWT token
         String token = authHeader.replace(BEARER_PREFIX, "");
         String email = extractEmailFromToken(token);
@@ -112,17 +114,17 @@ public class WalletController {
                     return walletService.getWalletByUserId(userId);
                 })
                 .map(wallet -> {
-                    Map response = Map.of(
+                    Map<String, Object> response = Map.of(
                         "balance", wallet.getBalance(),
-                        "currency", wallet.getCurrency(),
+                        CURRENCY, wallet.getCurrency(),
                         "walletId", wallet.getWalletId()
                     );
                     logger.info("[WALLET] ← Balance - Status: 200 - User: {} - Response: {}", email, response);
-                    return ResponseEntity.ok((Map) response);
+                    return ResponseEntity.ok(response);
                 })
-                .defaultIfEmpty(ResponseEntity.ok((Map) Map.of(
+                .defaultIfEmpty(ResponseEntity.ok(Map.of(
                     "balance", BigDecimal.ZERO,
-                    "currency", "ZAR",
+                    CURRENCY, "ZAR",
                     "message", "No wallet found"
                 )))
                 .doOnSuccess(response -> {
@@ -132,7 +134,7 @@ public class WalletController {
                 })
                 .onErrorResume(error -> {
                     logger.error("[WALLET] Balance - Status: 400 - User: {} - Error: {}", email, error.getMessage());
-                    return Mono.just(ResponseEntity.badRequest().body((Map) Map.of("error", "Failed to retrieve balance")));
+                    return Mono.just(ResponseEntity.badRequest().body(Map.of("error", "Failed to retrieve balance")));
                 });
     }
     

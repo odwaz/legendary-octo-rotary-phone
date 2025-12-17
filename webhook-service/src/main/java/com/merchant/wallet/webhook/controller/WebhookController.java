@@ -24,11 +24,15 @@ public class WebhookController {
 
     @PostMapping("/deposit")
     public Mono<ResponseEntity<Map<String, Object>>> processDeposit(@RequestBody Map<String, Object> request) {
-        logger.info("[WEBHOOK-CONTROLLER] → Deposit webhook - Request: {}", request);
+        if (logger.isInfoEnabled()) {
+            logger.info("[WEBHOOK-CONTROLLER] → Deposit webhook");
+        }
         
         return webhookService.processDeposit(request)
                 .map(response -> {
-                    logger.info("[WEBHOOK-CONTROLLER] ← Deposit webhook - Response: {}", response);
+                    if (logger.isInfoEnabled()) {
+                        logger.info("[WEBHOOK-CONTROLLER] ← Deposit webhook completed");
+                    }
                     return ResponseEntity.ok(response);
                 })
                 .onErrorResume(error -> {
@@ -39,11 +43,15 @@ public class WebhookController {
 
     @PostMapping("/withdrawal")
     public Mono<ResponseEntity<Map<String, Object>>> processWithdrawal(@RequestBody Map<String, Object> request) {
-        logger.info("[WEBHOOK-CONTROLLER] → Withdrawal webhook - Request: {}", request);
+        if (logger.isInfoEnabled()) {
+            logger.info("[WEBHOOK-CONTROLLER] → Withdrawal webhook");
+        }
         
         return webhookService.processWithdrawal(request)
                 .map(response -> {
-                    logger.info("[WEBHOOK-CONTROLLER] ← Withdrawal webhook - Response: {}", response);
+                    if (logger.isInfoEnabled()) {
+                        logger.info("[WEBHOOK-CONTROLLER] ← Withdrawal webhook completed");
+                    }
                     return ResponseEntity.ok(response);
                 })
                 .onErrorResume(error -> {
@@ -54,11 +62,15 @@ public class WebhookController {
 
     @PostMapping("/transfer")
     public Mono<ResponseEntity<Map<String, Object>>> processTransfer(@RequestBody Map<String, Object> request) {
-        logger.info("[WEBHOOK-CONTROLLER] → Transfer webhook - Request: {}", request);
+        if (logger.isInfoEnabled()) {
+            logger.info("[WEBHOOK-CONTROLLER] → Transfer webhook");
+        }
         
         return webhookService.processTransfer(request)
                 .map(response -> {
-                    logger.info("[WEBHOOK-CONTROLLER] ← Transfer webhook - Response: {}", response);
+                    if (logger.isInfoEnabled()) {
+                        logger.info("[WEBHOOK-CONTROLLER] ← Transfer webhook completed");
+                    }
                     return ResponseEntity.ok(response);
                 })
                 .onErrorResume(error -> {

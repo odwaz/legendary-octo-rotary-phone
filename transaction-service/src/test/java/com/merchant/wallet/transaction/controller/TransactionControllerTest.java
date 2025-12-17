@@ -11,7 +11,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -75,7 +74,6 @@ class TransactionControllerTest {
 
     @Test
     void shouldUpdateTransactionStatus() {
-        Map<String, Object> response = Map.of("status", "COMPLETED", "updatedAt", LocalDateTime.now().toString());
         Transaction updatedTransaction = new Transaction();
         updatedTransaction.setStatus("COMPLETED");
         when(transactionService.updateTransactionStatus(anyLong(), anyString()))

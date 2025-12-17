@@ -19,20 +19,24 @@ public class LoggingFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         
-        logger.info("[GATEWAY] → {} {} - User-Agent: {}", 
-            request.getMethod(), 
-            request.getPath(), 
-            request.getHeaders().getFirst("User-Agent"));
+        if (logger.isInfoEnabled()) {
+            logger.info("[GATEWAY] → {} {} - User-Agent: {}", 
+                request.getMethod(), 
+                request.getPath(), 
+                request.getHeaders().getFirst("User-Agent"));
+        }
         
         return chain.filter(exchange)
                 .doFinally(signalType -> {
-                    int statusCode = exchange.getResponse().getStatusCode() != null ? 
-                        exchange.getResponse().getStatusCode().value() : 0;
-                    logger.info("[GATEWAY] ← {} {} - Status: {} - {}", 
-                        request.getMethod(), 
-                        request.getPath(), 
-                        statusCode,
-                        statusCode >= 400 ? "ERROR" : "SUCCESS");
+                    if (logger.isInfoEnabled()) {
+                        int statusCode = exchange.getResponse().getStatusCode() != null ? 
+                            exchange.getResponse().getStatusCode().value() : 0;
+                        logger.info("[GATEWAY] ← {} {} - Status: {} - {}", 
+                            request.getMethod(), 
+                            request.getPath(), 
+                            statusCode,
+                            statusCode >= 400 ? "ERROR" : "SUCCESS");
+                    }
                 })
                 .doOnError(error -> logger.error("[GATEWAY] Request failed: {} {} - Error: {}", 
                     request.getMethod(), request.getPath(), error.getMessage()));

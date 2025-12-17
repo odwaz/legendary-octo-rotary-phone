@@ -2,7 +2,6 @@ package com.merchant.wallet.wallet.controller;
 
 import com.merchant.wallet.wallet.domain.Wallet;
 import com.merchant.wallet.wallet.repository.WalletRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,11 +13,13 @@ import java.util.Map;
 @RequestMapping("/api/v1/walletusers")
 public class WalletUserController {
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
-    
-    @Autowired
-    private WalletRepository walletRepository;
+    private final WebClient.Builder webClientBuilder;
+    private final WalletRepository walletRepository;
+
+    public WalletUserController(WebClient.Builder webClientBuilder, WalletRepository walletRepository) {
+        this.webClientBuilder = webClientBuilder;
+        this.walletRepository = walletRepository;
+    }
 
     @PostMapping("/register")
     public Mono<ResponseEntity<Map<String, String>>> register(@RequestBody Map<String, String> request) {
