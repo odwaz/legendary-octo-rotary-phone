@@ -71,12 +71,6 @@ public class AuthController {
             
             return authService.verifyOtp(identifier, otp)
                     .map(token -> {
-                        Map<String, Object> response = Map.of(
-                            "access_token", token.substring(0, 20) + "...",
-                            "token_type", "Bearer",
-                            "expires_in", 3600,
-                            "scope", "read write"
-                        );
                         if (logger.isInfoEnabled()) {
                             logger.info("[AUTH] ← OAuth2 token - Status: 200");
                         }

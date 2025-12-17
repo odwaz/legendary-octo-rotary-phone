@@ -24,14 +24,12 @@ public class TransactionController {
     @PostMapping
     public Mono<ResponseEntity<Transaction>> createTransaction(@RequestBody Transaction transaction) {
         if (logger.isInfoEnabled()) {
-            logger.info("[TRANSACTION] → Create - Request: {type: {}, amount: {}}", 
-                transaction.getTransactionType(), transaction.getAmount());
+            logger.info("[TRANSACTION] → Create transaction");
         }
         return transactionService.createTransaction(transaction)
                 .map(savedTransaction -> {
                     if (logger.isInfoEnabled()) {
-                        logger.info("[TRANSACTION] ← Create - Status: 200 - Response: {id: {}, status: {}}", 
-                            savedTransaction.getId(), savedTransaction.getStatus());
+                        logger.info("[TRANSACTION] ← Create - Status: 200");
                     }
                     return ResponseEntity.ok(savedTransaction);
                 })
@@ -58,12 +56,12 @@ public class TransactionController {
     @GetMapping("/wallet/{walletId}")
     public Flux<Transaction> getTransactionsByWallet(@PathVariable String walletId) {
         if (logger.isInfoEnabled()) {
-            logger.info("[TRANSACTION] → Get transactions for wallet: {}", walletId);
+            logger.info("[TRANSACTION] → Get transactions for wallet");
         }
         return transactionService.getTransactionsByWallet(walletId)
                 .doOnComplete(() -> {
                     if (logger.isInfoEnabled()) {
-                        logger.info("[TRANSACTION] ← Transactions retrieved for wallet: {}", walletId);
+                        logger.info("[TRANSACTION] ← Transactions retrieved");
                     }
                 })
                 .doOnError(error -> logger.error("[TRANSACTION] Failed to retrieve transactions - Error: {}", error.getMessage()));

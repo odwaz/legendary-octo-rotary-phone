@@ -78,7 +78,7 @@ public class WalletService {
                 });
     }
 
-    public Mono<Map<String, Object>> processPayment(Long fromWalletId, Long toWalletId, BigDecimal amount, String description) {
+    public Mono<Map> processPayment(Long fromWalletId, Long toWalletId, BigDecimal amount, String description) {
         return walletRepository.findById(fromWalletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found")))
                 .zipWith(walletRepository.findById(toWalletId)
@@ -116,7 +116,7 @@ public class WalletService {
                 });
     }
 
-    public Mono<Map<String, Object>> processTopUp(Long walletId, BigDecimal amount, String description) {
+    public Mono<Map> processTopUp(Long walletId, BigDecimal amount, String description) {
         return walletRepository.findById(walletId)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found")))
                 .flatMap(wallet -> {
@@ -157,7 +157,7 @@ public class WalletService {
                 });
     }
 
-    public Flux<Map<String, Object>> getTransactionsByWalletId(Long walletId) {
+    public Flux<Map> getTransactionsByWalletId(Long walletId) {
         return webClientBuilder.build()
                 .get()
                 .uri(transactionServiceUrl + TRANSACTIONS_URI + "/wallet/" + walletId)
@@ -165,13 +165,13 @@ public class WalletService {
                 .bodyToFlux(Map.class);
     }
 
-    public Mono<Map<String, Object>> processTopUpByAlias(String walletAlias, BigDecimal amount, String description) {
+    public Mono<Map> processTopUpByAlias(String walletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(walletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Wallet not found with alias: " + walletAlias)))
                 .flatMap(wallet -> processTopUp(wallet.getWalletId(), amount, description));
     }
 
-    public Mono<Map<String, Object>> processPaymentByAlias(String fromWalletAlias, String toWalletAlias, BigDecimal amount, String description) {
+    public Mono<Map> processPaymentByAlias(String fromWalletAlias, String toWalletAlias, BigDecimal amount, String description) {
         return walletRepository.findByWalletAlias(fromWalletAlias)
                 .switchIfEmpty(Mono.error(new RuntimeException("Source wallet not found with alias: " + fromWalletAlias)))
                 .zipWith(walletRepository.findByWalletAlias(toWalletAlias)

@@ -55,8 +55,7 @@ class WebhookServiceTest {
         // When & Then
         StepVerifier.create(webhookService.processDeposit(invalidRequest))
                 .assertNext(response -> {
-                    assertThat(response).containsKey("status");
-                    assertThat(response.get("status")).isEqualTo("error");
+                    assertThat(response).containsEntry("status", "error");
                     assertThat(response).containsKey("error");
                     assertThat(response.get("error").toString()).contains("missing walletId");
                 })
@@ -74,8 +73,7 @@ class WebhookServiceTest {
         // When & Then
         StepVerifier.create(webhookService.processDeposit(invalidRequest))
                 .assertNext(response -> {
-                    assertThat(response).containsKey("status");
-                    assertThat(response.get("status")).isEqualTo("error");
+                    assertThat(response).containsEntry("status", "error");
                     assertThat(response).containsKey("error");
                 })
                 .verifyComplete();
@@ -91,8 +89,7 @@ class WebhookServiceTest {
         // When & Then
         StepVerifier.create(webhookService.processWithdrawal(invalidRequest))
                 .assertNext(response -> {
-                    assertThat(response).containsKey("status");
-                    assertThat(response.get("status")).isEqualTo("error");
+                    assertThat(response).containsEntry("status", "error");
                     assertThat(response).containsKey("error");
                     assertThat(response.get("error").toString()).contains("missing amount");
                 })
@@ -110,8 +107,7 @@ class WebhookServiceTest {
         // When & Then
         StepVerifier.create(webhookService.processTransfer(invalidRequest))
                 .assertNext(response -> {
-                    assertThat(response).containsKey("status");
-                    assertThat(response.get("status")).isEqualTo("error");
+                    assertThat(response).containsEntry("status", "error");
                     assertThat(response).containsKey("error");
                     assertThat(response.get("error").toString()).contains("missing toWalletId");
                 })
@@ -123,10 +119,9 @@ class WebhookServiceTest {
         // When & Then
         StepVerifier.create(webhookService.getWebhookStatus())
                 .assertNext(response -> {
-                    assertThat(response).containsKey("status");
+                    assertThat(response).containsEntry("status", "active");
                     assertThat(response).containsKey("uptime");
                     assertThat(response).containsKey("lastProcessed");
-                    assertThat(response.get("status")).isEqualTo("active");
                 })
                 .verifyComplete();
     }
