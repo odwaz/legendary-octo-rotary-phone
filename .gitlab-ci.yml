@@ -1,13 +1,19 @@
 stages:
   - build
   - test
+  - security
   - docker
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  DOCKER_BUILDKIT: "1"
+  DOCKER_DRIVER: overlay2
+
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - .m2/repository
+    - "*/target/"
 
 build:
   stage: build
@@ -28,6 +34,15 @@ test:
     reports:
       junit:
         - "*/target/surefire-reports/TEST-*.xml"
+
+security:trivy:
+  stage: security
+  image: aquasec/trivy:latest
+  script:
+    - trivy fs --exit-code 0 --severity HIGH,CRITICAL --format table .
+  allow_failure: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"'
 
 .docker_build:
   stage: docker
@@ -52,39 +67,67 @@ test:
         IMAGE="$DOCKER_HUB_USER/$SERVICE_NAME:$CI_COMMIT_SHORT_SHA"
         IMAGE_LATEST="$DOCKER_HUB_USER/$SERVICE_NAME:latest"
       fi
-    - docker build -t "$IMAGE" -t "$IMAGE_LATEST" .
+    - docker pull "$IMAGE_LATEST" || true
+    - docker build --cache-from "$IMAGE_LATEST" --build-arg BUILDKIT_INLINE_CACHE=1 -t "$IMAGE" -t "$IMAGE_LATEST" .
     - docker push "$IMAGE"
     - docker push "$IMAGE_LATEST"
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
 
 docker:api-gateway:
   extends: .docker_build
   variables:
     SERVICE_DIR: api-gateway
     SERVICE_NAME: api-gateway
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
+      changes:
+        - api-gateway/**/*
+        - shared-dtos/**/*
+        - .gitlab-ci.yml
 
 docker:auth-service:
   extends: .docker_build
   variables:
     SERVICE_DIR: auth-service
     SERVICE_NAME: auth-service
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
+      changes:
+        - auth-service/**/*
+        - shared-dtos/**/*
+        - .gitlab-ci.yml
 
 docker:wallet-service:
   extends: .docker_build
   variables:
     SERVICE_DIR: wallet-service
     SERVICE_NAME: wallet-service
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
+      changes:
+        - wallet-service/**/*
+        - shared-dtos/**/*
+        - .gitlab-ci.yml
 
 docker:transaction-service:
   extends: .docker_build
   variables:
     SERVICE_DIR: transaction-service
     SERVICE_NAME: transaction-service
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
+      changes:
+        - transaction-service/**/*
+        - shared-dtos/**/*
+        - .gitlab-ci.yml
 
 docker:webhook-service:
   extends: .docker_build
   variables:
     SERVICE_DIR: webhook-service
     SERVICE_NAME: webhook-service
-
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "staging"'
+      changes:
+        - webhook-service/**/*
+        - shared-dtos/**/*
+        - .gitlab-ci.yml
