@@ -4,6 +4,7 @@ com\merchant\wallet\wallet\exception\InsufficientFundsException.class
 com\merchant\wallet\wallet\service\BalanceValidator.class
 com\merchant\wallet\wallet\service\WalletCreator.class
 com\merchant\wallet\wallet\domain\Wallet.class
+com\merchant\wallet\wallet\config\ResilienceConfig.class
 com\merchant\wallet\wallet\controller\BalanceController.class
 com\merchant\wallet\wallet\controller\WalletController.class
 com\merchant\wallet\wallet\WalletServiceApplication.class

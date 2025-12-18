@@ -2,6 +2,8 @@ package com.merchant.wallet.wallet.service;
 
 import com.merchant.wallet.wallet.domain.Wallet;
 import com.merchant.wallet.wallet.repository.WalletRepository;
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
+import io.github.resilience4j.reactor.circuitbreaker.operator.CircuitBreakerOperator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,6 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -22,10 +25,12 @@ public class WalletService {
 
     @Value("${transaction.service.url}")
     private String transactionServiceUrl;
+    private final CircuitBreaker circuitBreaker;
 
-    public WalletService(WalletRepository walletRepository, WebClient.Builder webClientBuilder) {
+    public WalletService(WalletRepository walletRepository, WebClient.Builder webClientBuilder,CircuitBreaker circuitBreaker) {
         this.walletRepository = walletRepository;
         this.webClientBuilder = webClientBuilder;
+        this.circuitBreaker = circuitBreaker;
     }
 
     public Mono<Wallet> getWalletById(Long walletId) {
@@ -157,13 +162,16 @@ public class WalletService {
                 });
     }
 
+
     @SuppressWarnings("rawtypes")
     public Flux<Map> getTransactionsByWalletId(Long walletId) {
         return webClientBuilder.build()
                 .get()
                 .uri(transactionServiceUrl + TRANSACTIONS_URI + "/wallet/" + walletId)
                 .retrieve()
-                .bodyToFlux(Map.class);
+                .bodyToFlux(Map.class)
+                .transform(CircuitBreakerOperator.of(circuitBreaker))
+                .onErrorResume(e -> Flux.just(Map.of("error", "Transaction service unavailable", "transactions", List.of())));
     }
 
     @SuppressWarnings("rawtypes")
