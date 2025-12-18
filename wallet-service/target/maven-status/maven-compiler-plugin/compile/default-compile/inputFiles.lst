@@ -1,4 +1,5 @@
 D:\Documents\projects\wallet-microservices\wallet-service\src\main\java\com\merchant\wallet\wallet\config\OpenApiConfig.java
+D:\Documents\projects\wallet-microservices\wallet-service\src\main\java\com\merchant\wallet\wallet\config\ResilienceConfig.java
 D:\Documents\projects\wallet-microservices\wallet-service\src\main\java\com\merchant\wallet\wallet\config\WebClientConfig.java
 D:\Documents\projects\wallet-microservices\wallet-service\src\main\java\com\merchant\wallet\wallet\controller\BalanceController.java
 D:\Documents\projects\wallet-microservices\wallet-service\src\main\java\com\merchant\wallet\wallet\controller\HealthController.java
