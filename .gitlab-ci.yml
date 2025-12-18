@@ -37,7 +37,9 @@ test:
 
 security:trivy:
   stage: security
-  image: aquasec/trivy:latest
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
   script:
     - trivy fs --exit-code 0 --severity HIGH,CRITICAL --format table .
   allow_failure: true
